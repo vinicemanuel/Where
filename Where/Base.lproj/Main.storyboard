@@ -50,7 +50,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="YFy-Fq-9S8">
-                                <rect key="frame" x="93.5" y="56" width="227" height="32"/>
+                                <rect key="frame" x="93.5" y="44" width="227" height="32"/>
                                 <color key="backgroundColor" name="Icons"/>
                                 <segments>
                                     <segment title="Current Record"/>
@@ -58,8 +58,23 @@
                                 </segments>
                             </segmentedControl>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SXz-r1-NKX">
-                                <rect key="frame" x="0.0" y="99" width="414" height="714"/>
+                                <rect key="frame" x="0.0" y="87" width="414" height="726"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1me-fA-s5R">
+                                <rect key="frame" x="334" y="733" width="50" height="50"/>
+                                <color key="backgroundColor" name="Backgroud"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="pHz-ga-ih5"/>
+                                    <constraint firstAttribute="width" constant="50" id="pvV-g6-anu"/>
+                                </constraints>
+                                <color key="tintColor" name="Icons"/>
+                                <state key="normal" image="stop.fill" catalog="system"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G7F-O3-n1y">
                                 <rect key="frame" x="334" y="733" width="50" height="50"/>
                                 <color key="backgroundColor" name="Backgroud"/>
@@ -74,14 +89,19 @@
                                         <integer key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="playPauseButtonPressed:" destination="YQi-TD-Oxa" eventType="touchUpInside" id="gTo-nb-0iB"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BbE-Jn-QFg"/>
                         <color key="backgroundColor" name="Backgroud"/>
                         <constraints>
+                            <constraint firstItem="1me-fA-s5R" firstAttribute="centerX" secondItem="G7F-O3-n1y" secondAttribute="centerX" id="28z-0Y-vi6"/>
                             <constraint firstItem="BbE-Jn-QFg" firstAttribute="bottom" secondItem="SXz-r1-NKX" secondAttribute="bottom" id="JlD-iy-QzW"/>
                             <constraint firstItem="BbE-Jn-QFg" firstAttribute="trailing" secondItem="SXz-r1-NKX" secondAttribute="trailing" id="Jpg-nu-Fbx"/>
-                            <constraint firstItem="YFy-Fq-9S8" firstAttribute="top" secondItem="BbE-Jn-QFg" secondAttribute="top" constant="12" id="Vla-7F-2Mg"/>
+                            <constraint firstItem="G7F-O3-n1y" firstAttribute="top" secondItem="1me-fA-s5R" secondAttribute="bottom" constant="-50" id="NiQ-tV-S7c"/>
+                            <constraint firstItem="YFy-Fq-9S8" firstAttribute="top" secondItem="BbE-Jn-QFg" secondAttribute="top" id="Vla-7F-2Mg"/>
                             <constraint firstItem="SXz-r1-NKX" firstAttribute="top" secondItem="YFy-Fq-9S8" secondAttribute="bottom" constant="12" id="YVj-q6-iEb"/>
                             <constraint firstItem="YFy-Fq-9S8" firstAttribute="centerX" secondItem="BbE-Jn-QFg" secondAttribute="centerX" id="d7v-r4-Daj"/>
                             <constraint firstItem="BbE-Jn-QFg" firstAttribute="trailing" secondItem="G7F-O3-n1y" secondAttribute="trailing" constant="30" id="qHm-Ml-jIE"/>
@@ -92,8 +112,10 @@
                     <tabBarItem key="tabBarItem" title="Record" image="record.circle.fill" catalog="system" landscapeImage="record.circle.fill" id="Q9C-NK-rf6"/>
                     <connections>
                         <outlet property="mapView" destination="SXz-r1-NKX" id="bop-1N-ZYZ"/>
-                        <outlet property="playButton" destination="G7F-O3-n1y" id="zTO-4r-pfw"/>
+                        <outlet property="playPauseButton" destination="G7F-O3-n1y" id="zTO-4r-pfw"/>
                         <outlet property="segmentedControl" destination="YFy-Fq-9S8" id="vsp-Dw-5er"/>
+                        <outlet property="stopButton" destination="1me-fA-s5R" id="EHZ-ZK-d2W"/>
+                        <outlet property="verticalSpacePlayPause" destination="NiQ-tV-S7c" id="PAf-UU-Q6z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p4b-lk-oG4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -126,6 +148,7 @@
         <image name="map.fill" catalog="system" width="128" height="110"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>
         <image name="record.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="stop.fill" catalog="system" width="128" height="113"/>
         <namedColor name="Backgroud">
             <color red="0.18431372549019609" green="0.52549019607843139" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
