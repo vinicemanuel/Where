@@ -1,24 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MWQ-3Z-Iu3">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Map-->
+        <scene sceneID="hLM-8s-SeI">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <viewController id="0bB-eH-TSq" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lnd-aU-dxt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="niB-mk-oPQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Map" image="map.fill" catalog="system" landscapeImage="map.fill" id="lIL-HK-STN"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W9X-4k-3Ib" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-426" y="194"/>
+        </scene>
+        <!--Activites-->
+        <scene sceneID="ElH-Rc-bVh">
+            <objects>
+                <viewController id="85b-1P-YHW" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9jA-cr-nqK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="sfM-ow-hl8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Activites" image="location.fill" catalog="system" landscapeImage="location.fill" id="nQP-79-rLw"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V1m-X2-7cJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1313" y="194"/>
+        </scene>
+        <!--Record-->
+        <scene sceneID="zud-qK-erA">
+            <objects>
+                <viewController id="YQi-TD-Oxa" customClass="RecordViewController" customModule="Where" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9ll-66-aeA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="YFy-Fq-9S8">
+                                <rect key="frame" x="93.5" y="56" width="227" height="32"/>
+                                <color key="backgroundColor" name="Icons"/>
+                                <segments>
+                                    <segment title="Current Record"/>
+                                    <segment title="All Activities"/>
+                                </segments>
+                            </segmentedControl>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SXz-r1-NKX">
+                                <rect key="frame" x="0.0" y="99" width="414" height="714"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G7F-O3-n1y">
+                                <rect key="frame" x="334" y="733" width="50" height="50"/>
+                                <color key="backgroundColor" name="Backgroud"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="BXk-MF-DU3"/>
+                                    <constraint firstAttribute="height" constant="50" id="FRy-Uh-A1i"/>
+                                </constraints>
+                                <color key="tintColor" name="Icons"/>
+                                <state key="normal" image="play.fill" catalog="system"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BbE-Jn-QFg"/>
+                        <color key="backgroundColor" name="Backgroud"/>
+                        <constraints>
+                            <constraint firstItem="BbE-Jn-QFg" firstAttribute="bottom" secondItem="SXz-r1-NKX" secondAttribute="bottom" id="JlD-iy-QzW"/>
+                            <constraint firstItem="BbE-Jn-QFg" firstAttribute="trailing" secondItem="SXz-r1-NKX" secondAttribute="trailing" id="Jpg-nu-Fbx"/>
+                            <constraint firstItem="YFy-Fq-9S8" firstAttribute="top" secondItem="BbE-Jn-QFg" secondAttribute="top" constant="12" id="Vla-7F-2Mg"/>
+                            <constraint firstItem="SXz-r1-NKX" firstAttribute="top" secondItem="YFy-Fq-9S8" secondAttribute="bottom" constant="12" id="YVj-q6-iEb"/>
+                            <constraint firstItem="YFy-Fq-9S8" firstAttribute="centerX" secondItem="BbE-Jn-QFg" secondAttribute="centerX" id="d7v-r4-Daj"/>
+                            <constraint firstItem="BbE-Jn-QFg" firstAttribute="trailing" secondItem="G7F-O3-n1y" secondAttribute="trailing" constant="30" id="qHm-Ml-jIE"/>
+                            <constraint firstItem="BbE-Jn-QFg" firstAttribute="bottom" secondItem="G7F-O3-n1y" secondAttribute="bottom" constant="30" id="yTj-wV-L7k"/>
+                            <constraint firstItem="SXz-r1-NKX" firstAttribute="leading" secondItem="BbE-Jn-QFg" secondAttribute="leading" id="zLr-qf-uxO"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Record" image="record.circle.fill" catalog="system" landscapeImage="record.circle.fill" id="Q9C-NK-rf6"/>
+                    <connections>
+                        <outlet property="mapView" destination="SXz-r1-NKX" id="bop-1N-ZYZ"/>
+                        <outlet property="playButton" destination="G7F-O3-n1y" id="zTO-4r-pfw"/>
+                        <outlet property="segmentedControl" destination="YFy-Fq-9S8" id="vsp-Dw-5er"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p4b-lk-oG4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2175" y="194"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="s5D-wQ-Xuo">
+            <objects>
+                <tabBarController id="MWQ-3Z-Iu3" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2tO-NR-1F7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" name="Icons"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="YQi-TD-Oxa" kind="relationship" relationship="viewControllers" id="nVp-LJ-ugN"/>
+                        <segue destination="85b-1P-YHW" kind="relationship" relationship="viewControllers" id="Bwd-hj-gSI"/>
+                        <segue destination="0bB-eH-TSq" kind="relationship" relationship="viewControllers" id="hND-9k-nVp"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9eV-zX-01g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1312" y="-569"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="location.fill" catalog="system" width="128" height="121"/>
+        <image name="map.fill" catalog="system" width="128" height="110"/>
+        <image name="play.fill" catalog="system" width="116" height="128"/>
+        <image name="record.circle.fill" catalog="system" width="128" height="121"/>
+        <namedColor name="Backgroud">
+            <color red="0.18431372549019609" green="0.52549019607843139" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Icons">
+            <color red="0.18431372549019609" green="0.8666666666666667" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
