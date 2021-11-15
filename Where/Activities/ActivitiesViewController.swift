@@ -10,8 +10,6 @@ import UIKit
 class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     
-    private let cellID = "activityCell"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
@@ -20,12 +18,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     
     //MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: self.cellID) as! ActivityTableViewCell
-//        
-//        var configuration = cell?.defaultContentConfiguration()
-//        configuration?.text = "\(indexPath.row)"
-//        
-//        cell?.contentConfiguration = configuration
+        let cell = tableView.dequeueReusableCell(withIdentifier: ActivityTableViewCell.cellID) as! ActivityTableViewCell
         
         return cell
     }

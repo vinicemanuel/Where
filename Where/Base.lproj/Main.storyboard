@@ -84,9 +84,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="dateLabel" destination="zfp-PC-eSQ" id="Y55-kr-yyX"/>
-                                            <outlet property="distanceLabel" destination="Q8X-51-5pQ" id="IMo-64-TzQ"/>
-                                            <outlet property="mapView" destination="DgZ-uA-38x" id="vgd-Un-N43"/>
+                                            <outlet property="dateLabel" destination="zfp-PC-eSQ" id="RYv-hV-4oW"/>
+                                            <outlet property="distanceLabel" destination="Q8X-51-5pQ" id="WlS-K4-N4o"/>
+                                            <outlet property="mapView" destination="DgZ-uA-38x" id="8ie-Tg-tb7"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

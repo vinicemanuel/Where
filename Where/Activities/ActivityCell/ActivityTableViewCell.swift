@@ -13,6 +13,8 @@ class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     
+    static let cellID = "activityCell"
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
