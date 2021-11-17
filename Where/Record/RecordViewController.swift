@@ -25,8 +25,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        configLocationManager()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,15 +34,22 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate {
         self.requestLocation()
     }
     
-    func requestLocation() {
+    private func configLocationManager() {
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.activityType = .fitness
+        self.locationManager.distanceFilter = 1
+    }
+    
+    private func requestLocation() {
         self.locationManager.requestWhenInUseAuthorization()
     }
     
-    func deviceLocationIsAuthorized() -> Bool {
+    private func deviceLocationIsAuthorized() -> Bool {
         return self.locationManager.authorizationStatus == .authorizedWhenInUse || self.locationManager.authorizationStatus == .authorizedAlways
     }
     
-    func withoutPermission() {
+    private func withoutPermission() {
         let alert = UIAlertController(title: "Location denied", message: "Please, go to settings and enable location permission for Where app", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alert.addAction(okAction)
@@ -51,25 +57,32 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func playPauseButtonPressed(_ sender: Any) {
-        let isAuthorized = self.deviceLocationIsAuthorized()
-        if isAuthorized {
-            animateButtons()
-            //start or pause record
-        } else {
-            self.withoutPermission()
-        }
-    }
-    
     private func animateButtons() {
         self.verticalSpacePlayPause.constant = self.isRecording ? self.hiddenStopButtonValue : self.showStopButtonValue
         let newImage = self.isRecording ? UIImage(systemName: "play.fill")! : UIImage(systemName: "pause.fill")!
         
-        self.isRecording.toggle()
-        
         UIView.transition(with: self.playPauseButton, duration: 0.3, options: .transitionFlipFromBottom) {
             self.playPauseButton.setImage(newImage, for: .normal)
             self.view.layoutIfNeeded()
+        }
+    }
+    
+    private func startOrPauseRecordLocation() {
+        if !self.isRecording {
+            self.locationManager.startUpdatingLocation()
+        } else {
+            self.locationManager.stopUpdatingLocation()
+        }
+    }
+    
+    @IBAction func playPauseButtonPressed(_ sender: Any) {
+        let isAuthorized = self.deviceLocationIsAuthorized()
+        if isAuthorized {
+            self.animateButtons()
+            self.startOrPauseRecordLocation()
+            self.isRecording.toggle()
+        } else {
+            self.withoutPermission()
         }
     }
     
@@ -91,5 +104,9 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate {
         default:
             print("default")
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print(locations)
     }
 }
