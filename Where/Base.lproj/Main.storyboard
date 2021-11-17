@@ -119,7 +119,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="YFy-Fq-9S8">
-                                <rect key="frame" x="93.5" y="44" width="227" height="32"/>
+                                <rect key="frame" x="93.5" y="56" width="227" height="32"/>
                                 <color key="backgroundColor" name="Icons"/>
                                 <segments>
                                     <segment title="Current Record"/>
@@ -127,7 +127,7 @@
                                 </segments>
                             </segmentedControl>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SXz-r1-NKX">
-                                <rect key="frame" x="0.0" y="87" width="414" height="726"/>
+                                <rect key="frame" x="0.0" y="107" width="414" height="706"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1me-fA-s5R">
                                 <rect key="frame" x="334" y="733" width="50" height="50"/>
@@ -170,8 +170,8 @@
                             <constraint firstItem="BbE-Jn-QFg" firstAttribute="bottom" secondItem="SXz-r1-NKX" secondAttribute="bottom" id="JlD-iy-QzW"/>
                             <constraint firstItem="BbE-Jn-QFg" firstAttribute="trailing" secondItem="SXz-r1-NKX" secondAttribute="trailing" id="Jpg-nu-Fbx"/>
                             <constraint firstItem="G7F-O3-n1y" firstAttribute="top" secondItem="1me-fA-s5R" secondAttribute="bottom" constant="-50" id="NiQ-tV-S7c"/>
-                            <constraint firstItem="YFy-Fq-9S8" firstAttribute="top" secondItem="BbE-Jn-QFg" secondAttribute="top" id="Vla-7F-2Mg"/>
-                            <constraint firstItem="SXz-r1-NKX" firstAttribute="top" secondItem="YFy-Fq-9S8" secondAttribute="bottom" constant="12" id="YVj-q6-iEb"/>
+                            <constraint firstItem="YFy-Fq-9S8" firstAttribute="top" secondItem="BbE-Jn-QFg" secondAttribute="top" constant="12" id="Vla-7F-2Mg"/>
+                            <constraint firstItem="SXz-r1-NKX" firstAttribute="top" secondItem="YFy-Fq-9S8" secondAttribute="bottom" constant="20" id="YVj-q6-iEb"/>
                             <constraint firstItem="YFy-Fq-9S8" firstAttribute="centerX" secondItem="BbE-Jn-QFg" secondAttribute="centerX" id="d7v-r4-Daj"/>
                             <constraint firstItem="BbE-Jn-QFg" firstAttribute="trailing" secondItem="G7F-O3-n1y" secondAttribute="trailing" constant="30" id="qHm-Ml-jIE"/>
                             <constraint firstItem="BbE-Jn-QFg" firstAttribute="bottom" secondItem="G7F-O3-n1y" secondAttribute="bottom" constant="30" id="yTj-wV-L7k"/>
