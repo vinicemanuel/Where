@@ -106,6 +106,16 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         }
     }
     
+    @IBAction func stopButtonPressed(_ sender: Any) {
+        print("stop")
+    }
+    
+    @IBAction func centerButtonPressed(_ sender: Any) {
+        if let location = self.lastLocation {
+            self.centerInMap(for: location)
+        }
+    }
+    
     //MARK: - CLLocationManagerDelegate
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
