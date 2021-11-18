@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class RecordViewController: UIViewController, CLLocationManagerDelegate {
+class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var stopButton: UIButton!
@@ -19,13 +19,15 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate {
     private let hiddenStopButtonValue: CGFloat = -50
     private let showStopButtonValue: CGFloat = 20
     private var isRecording = false
+    private var shouldCenterLocatin = false
+    private var lastLocation: CLLocationCoordinate2D?
     
     private let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configLocationManager()
+        self.configLocationManager()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,12 +35,30 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate {
         
         self.requestLocation()
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.configMap()
+    }
+    
+    private func configMap() {
+        self.mapView.showsUserLocation = true
+        self.mapView.delegate = self
+        self.shouldCenterLocatin = true
+        self.locationManager.requestLocation()
+    }
     
     private func configLocationManager() {
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.activityType = .fitness
         self.locationManager.distanceFilter = 1
+    }
+    
+    private func centerInMap(for location: CLLocationCoordinate2D) {
+        self.mapView.setCameraZoomRange(MKMapView.CameraZoomRange(minCenterCoordinateDistance: 100, maxCenterCoordinateDistance: 10000), animated: true)
+        self.mapView.setCenter(location, animated: true)
     }
     
     private func requestLocation() {
@@ -108,5 +128,17 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print(locations)
+        
+        if let location = locations.last, self.shouldCenterLocatin {
+            self.centerInMap(for: location.coordinate)
+        }
+        
+        self.lastLocation = locations.last?.coordinate
     }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("error:: \(error.localizedDescription)")
+    }
+    
+    //MARK: - MKMapViewDelegate
 }
