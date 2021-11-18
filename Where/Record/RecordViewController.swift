@@ -8,8 +8,9 @@
 import UIKit
 import MapKit
 import CoreLocation
+import CoreData
 
-class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class RecordViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var stopButton: UIButton!
@@ -19,8 +20,9 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     private let hiddenStopButtonValue: CGFloat = -50
     private let showStopButtonValue: CGFloat = 20
     private var isRecording = false
-    private var shouldCenterLocatin = false
+    private var shouldCenterLocation = false
     private var lastLocation: CLLocationCoordinate2D?
+    private var workout = Workout()
     
     private let locationManager = CLLocationManager()
     
@@ -44,20 +46,19 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     private func configMap() {
         self.mapView.showsUserLocation = true
-        self.mapView.delegate = self
-        self.shouldCenterLocatin = true
+        self.mapView.setCameraZoomRange(MKMapView.CameraZoomRange(minCenterCoordinateDistance: 100, maxCenterCoordinateDistance: 10000), animated: true)
+        self.shouldCenterLocation = true
         self.locationManager.requestLocation()
     }
     
     private func configLocationManager() {
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.activityType = .fitness
-        self.locationManager.distanceFilter = 1
     }
     
     private func centerInMap(for location: CLLocationCoordinate2D) {
-        self.mapView.setCameraZoomRange(MKMapView.CameraZoomRange(minCenterCoordinateDistance: 100, maxCenterCoordinateDistance: 10000), animated: true)
+        let region = MKCoordinateRegion(center: location, latitudinalMeters: 500, longitudinalMeters: 500)
+        self.mapView.setRegion(region, animated: true)
         self.mapView.setCenter(location, animated: true)
     }
     
@@ -98,6 +99,9 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     @IBAction func playPauseButtonPressed(_ sender: Any) {
         let isAuthorized = self.deviceLocationIsAuthorized()
         if isAuthorized {
+            if let location = self.lastLocation {
+                self.centerInMap(for: location)
+            }
             self.animateButtons()
             self.startOrPauseRecordLocation()
             self.isRecording.toggle()
@@ -111,9 +115,11 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     @IBAction func centerButtonPressed(_ sender: Any) {
+        self.shouldCenterLocation = true
         if let location = self.lastLocation {
             self.centerInMap(for: location)
         }
+        self.locationManager.requestLocation()
     }
     
     //MARK: - CLLocationManagerDelegate
@@ -137,9 +143,9 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(locations)
+        print(shouldCenterLocation)
         
-        if let location = locations.last, self.shouldCenterLocatin {
+        if let location = locations.last, self.shouldCenterLocation {
             self.centerInMap(for: location.coordinate)
         }
         
@@ -149,6 +155,4 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("error:: \(error.localizedDescription)")
     }
-    
-    //MARK: - MKMapViewDelegate
 }
