@@ -10,7 +10,7 @@ import MapKit
 import CoreLocation
 import CoreData
 
-class RecordViewController: UIViewController, CLLocationManagerDelegate {
+class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var stopButton: UIButton!
@@ -21,7 +21,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate {
     private let showStopButtonValue: CGFloat = 20
     private var isRecording = false
     private var shouldCenterLocation = false
-    private var lastLocation: CLLocationCoordinate2D?
+    private var lastLocation: CLLocation?
     private var workout = Workout()
     
     private let locationManager = CLLocationManager()
@@ -37,16 +37,28 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate {
         
         self.requestLocation()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         self.configMap()
     }
     
+    private func animateButtons() {
+         self.verticalSpacePlayPause.constant = self.isRecording ? self.hiddenStopButtonValue : self.showStopButtonValue
+        let alpha: CGFloat = self.isRecording ? 1 : 0
+         
+         UIView.transition(with: self.playPauseButton, duration: 0.3, options: .transitionFlipFromBottom) {
+             self.playPauseButton.alpha = alpha
+             self.view.layoutIfNeeded()
+         }
+     }
+    
     private func configMap() {
         self.mapView.showsUserLocation = true
         self.mapView.setCameraZoomRange(MKMapView.CameraZoomRange(minCenterCoordinateDistance: 100, maxCenterCoordinateDistance: 10000), animated: true)
+        self.mapView.delegate = self
+        
         self.shouldCenterLocation = true
         self.locationManager.requestLocation()
     }
@@ -57,7 +69,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     private func centerInMap(for location: CLLocationCoordinate2D) {
-        let region = MKCoordinateRegion(center: location, latitudinalMeters: 500, longitudinalMeters: 500)
+        let region = MKCoordinateRegion(center: location, latitudinalMeters: 50, longitudinalMeters: 50)
         self.mapView.setRegion(region, animated: true)
         self.mapView.setCenter(location, animated: true)
     }
@@ -78,33 +90,21 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    private func animateButtons() {
-        self.verticalSpacePlayPause.constant = self.isRecording ? self.hiddenStopButtonValue : self.showStopButtonValue
-        let newImage = self.isRecording ? UIImage(systemName: "play.fill")! : UIImage(systemName: "pause.fill")!
-        
-        UIView.transition(with: self.playPauseButton, duration: 0.3, options: .transitionFlipFromBottom) {
-            self.playPauseButton.setImage(newImage, for: .normal)
-            self.view.layoutIfNeeded()
-        }
+    private func updateMapView() {
+        self.mapView.removeOverlays(self.mapView.overlays)
+        let overlay = MKPolyline(coordinates: self.workout.route, count: self.workout.route.count)
+        self.mapView.addOverlay(overlay)
     }
     
-    private func startOrPauseRecordLocation() {
-        if !self.isRecording {
-            self.locationManager.startUpdatingLocation()
-        } else {
-            self.locationManager.stopUpdatingLocation()
-        }
-    }
-    
-    @IBAction func playPauseButtonPressed(_ sender: Any) {
+    @IBAction func playButtonPressed(_ sender: Any) {
         let isAuthorized = self.deviceLocationIsAuthorized()
         if isAuthorized {
             if let location = self.lastLocation {
-                self.centerInMap(for: location)
+                self.centerInMap(for: location.coordinate)
             }
+            self.locationManager.startUpdatingLocation()
             self.animateButtons()
-            self.startOrPauseRecordLocation()
-            self.isRecording.toggle()
+            self.isRecording = true
         } else {
             self.withoutPermission()
         }
@@ -112,12 +112,16 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func stopButtonPressed(_ sender: Any) {
         print("stop")
+        self.locationManager.stopUpdatingLocation()
+        self.animateButtons()
+        self.isRecording = false
+        print(self.workout)
     }
     
     @IBAction func centerButtonPressed(_ sender: Any) {
         self.shouldCenterLocation = true
         if let location = self.lastLocation {
-            self.centerInMap(for: location)
+            self.centerInMap(for: location.coordinate)
         }
         self.locationManager.requestLocation()
     }
@@ -143,16 +147,36 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(shouldCenterLocation)
-        
         if let location = locations.last, self.shouldCenterLocation {
             self.centerInMap(for: location.coordinate)
+            self.workout.updateWithNextLocation(nextLocation: location)
+            self.updateMapView()
+            
+            if self.isRecording {
+                self.updateMapView()
+            }
+            
+            self.lastLocation = location
         }
-        
-        self.lastLocation = locations.last?.coordinate
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("error:: \(error.localizedDescription)")
+        print("error: \(error.localizedDescription)")
+    }
+    
+    //MARK: - MKMapViewDelegate
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if (!self.isRecording) {
+            return MKOverlayRenderer()
+        }
+        
+        if let routePolyline = overlay as? MKPolyline {
+            let renderer = MKPolylineRenderer(polyline: routePolyline)
+            renderer.strokeColor = UIColor.blue.withAlphaComponent(0.9)
+            renderer.lineWidth = 7
+            return renderer
+        }
+
+        return MKOverlayRenderer()
     }
 }

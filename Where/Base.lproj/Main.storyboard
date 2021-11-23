@@ -162,7 +162,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="playPauseButtonPressed:" destination="YQi-TD-Oxa" eventType="touchUpInside" id="gTo-nb-0iB"/>
+                                    <action selector="playButtonPressed:" destination="YQi-TD-Oxa" eventType="touchUpInside" id="cFa-NG-SW3"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBx-9f-sDi">
