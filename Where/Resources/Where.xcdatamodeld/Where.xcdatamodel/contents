@@ -3,15 +3,15 @@
     <entity name="Activity" representedClassName="Activity" syncable="YES" codeGenerationType="class">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="distance" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Route" inverseName="activity" inverseEntity="Route"/>
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Location" inverseName="activity" inverseEntity="Location"/>
     </entity>
-    <entity name="Route" representedClassName="Route" syncable="YES" codeGenerationType="class">
+    <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
         <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="locations" inverseEntity="Activity"/>
     </entity>
     <elements>
-        <element name="Activity" positionX="-63" positionY="-18" width="128" height="74"/>
-        <element name="Route" positionX="-54" positionY="9" width="128" height="74"/>
+        <element name="Activity" positionX="-63" positionY="-18" width="128" height="88"/>
+        <element name="Location" positionX="-54" positionY="9" width="128" height="88"/>
     </elements>
 </model>

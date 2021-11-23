@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		342EFD0A274DA82A00376997 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD09274DA82A00376997 /* DatabaseHelper.swift */; };
+		342EFD0C274DB02300376997 /* CustonPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD0B274DB02300376997 /* CustonPolyline.swift */; };
 		34300595273B39C9004C0D27 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300594273B39C9004C0D27 /* ActivityTableViewCell.swift */; };
 		348350552747177200CDD898 /* Where.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 348350532747177200CDD898 /* Where.xcdatamodeld */; };
 		3483505727471A7E00CDD898 /* Workout .swift in Sources */ = {isa = PBXBuildFile; fileRef = 3483505627471A7E00CDD898 /* Workout .swift */; };
@@ -32,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		342EFD09274DA82A00376997 /* DatabaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
+		342EFD0B274DB02300376997 /* CustonPolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustonPolyline.swift; sourceTree = "<group>"; };
 		34300594273B39C9004C0D27 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		348350542747177200CDD898 /* Where.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Where.xcdatamodel; sourceTree = "<group>"; };
 		3483505627471A7E00CDD898 /* Workout .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout .swift"; sourceTree = "<group>"; };
@@ -68,6 +72,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		342EFD08274DA81400376997 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				342EFD09274DA82A00376997 /* DatabaseHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		34300593273B37EE004C0D27 /* ActivityCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				3483505627471A7E00CDD898 /* Workout .swift */,
+				342EFD0B274DB02300376997 /* CustonPolyline.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -113,6 +126,7 @@
 		348AF4C62739DB7E003D0B00 /* Where */ = {
 			isa = PBXGroup;
 			children = (
+				342EFD08274DA81400376997 /* Helper */,
 				348350522747175600CDD898 /* Resources */,
 				3483504F27447AE400CDD898 /* Model */,
 				348AF501273B2A59003D0B00 /* Activities */,
@@ -263,7 +277,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				348AF4FB2739E839003D0B00 /* RecordViewController.swift in Sources */,
+				342EFD0A274DA82A00376997 /* DatabaseHelper.swift in Sources */,
 				348AF5002739EE61003D0B00 /* Colors.swift in Sources */,
+				342EFD0C274DB02300376997 /* CustonPolyline.swift in Sources */,
 				34300595273B39C9004C0D27 /* ActivityTableViewCell.swift in Sources */,
 				348350552747177200CDD898 /* Where.xcdatamodeld in Sources */,
 				3483505727471A7E00CDD898 /* Workout .swift in Sources */,

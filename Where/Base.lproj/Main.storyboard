@@ -125,6 +125,9 @@
                                     <segment title="Current Record"/>
                                     <segment title="All Activities"/>
                                 </segments>
+                                <connections>
+                                    <action selector="mapVisualizationDidChange:" destination="YQi-TD-Oxa" eventType="valueChanged" id="RCs-Oe-FwB"/>
+                                </connections>
                             </segmentedControl>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" pitchEnabled="NO" showsCompass="NO" showsScale="YES" showsTraffic="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SXz-r1-NKX">
                                 <rect key="frame" x="0.0" y="107" width="414" height="706"/>

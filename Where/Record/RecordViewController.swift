@@ -90,9 +90,10 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.present(alert, animated: true, completion: nil)
     }
     
-    private func updateMapView() {
+    private func updateMapViewWithCurrentRoute() {
         self.mapView.removeOverlays(self.mapView.overlays)
-        let overlay = MKPolyline(coordinates: self.workout.route, count: self.workout.route.count)
+        let overlay = CustonPolyline(coordinates: self.workout.route, count: self.workout.route.count)
+        overlay.color = UIColor.blue.withAlphaComponent(0.9)
         self.mapView.addOverlay(overlay)
     }
     
@@ -102,11 +103,21 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     private func save() {
+        DatabaseHelper.shared.saveWorkout(workout: self.workout)
+        self.showSavedAlert()
+        self.restart()
+    }
+    
+    private func showSavedAlert() {
+        let alert = UIAlertController(title: "Route saved", message: "", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(okAction)
         
+        self.present(alert, animated: true, completion: nil)
     }
     
     private func showSaveRouteALert() {
-        let alert = UIAlertController(title: "Would you like to this route?", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Would you like to save this route?", message: "", preferredStyle: .alert)
     
         let yesAction = UIAlertAction(title: "YES", style: .default, handler: { _ in
             self.save()
@@ -134,6 +145,10 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         } else {
             self.showWithoutPermissionAlert()
         }
+    }
+    
+    @IBAction func mapVisualizationDidChange(_ sender: UISegmentedControl) {
+        print("tag", sender.selectedSegmentIndex)
     }
     
     @IBAction func stopButtonPressed(_ sender: Any) {
@@ -177,10 +192,10 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         if let location = locations.last, self.shouldCenterLocation {
             self.centerInMap(for: location.coordinate)
             self.workout.updateWithNextLocation(nextLocation: location)
-            self.updateMapView()
+            self.updateMapViewWithCurrentRoute()
             
             if self.isRecording {
-                self.updateMapView()
+                self.updateMapViewWithCurrentRoute()
             }
             
             self.lastLocation = location
@@ -197,9 +212,9 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             return MKOverlayRenderer()
         }
         
-        if let routePolyline = overlay as? MKPolyline {
+        if let routePolyline = overlay as? CustonPolyline {
             let renderer = MKPolylineRenderer(polyline: routePolyline)
-            renderer.strokeColor = UIColor.blue.withAlphaComponent(0.9)
+            renderer.strokeColor = routePolyline.color
             renderer.lineWidth = 7
             return renderer
         }
