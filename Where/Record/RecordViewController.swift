@@ -148,7 +148,12 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     @IBAction func mapVisualizationDidChange(_ sender: UISegmentedControl) {
-        print("tag", sender.selectedSegmentIndex)
+        if sender.selectedSegmentIndex == 0 {
+            
+        } else {
+            let activities = DatabaseHelper.shared.getAllActivities()
+            print(activities)
+        }
     }
     
     @IBAction func stopButtonPressed(_ sender: Any) {

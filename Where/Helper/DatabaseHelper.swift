@@ -25,7 +25,6 @@ class DatabaseHelper {
     
     func saveWorkout(workout: Workout) {
         let context = self.persistentContainer.viewContext
-        
         let activity = Activity(context: context)
         
         let locations = workout.route.map({(cllocation: CLLocationCoordinate2D) -> Location in
@@ -47,7 +46,18 @@ class DatabaseHelper {
         }
     }
     
-    func getAllActivity() -> [Activity] {
-        return []
+    func getAllActivities() -> [Activity] {
+        let context = self.persistentContainer.viewContext
+        let request = Activity.fetchRequest()
+        
+        var result: [Activity] = []
+        
+        do {
+            result = try context.fetch(request)
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        return result
     }
 }
