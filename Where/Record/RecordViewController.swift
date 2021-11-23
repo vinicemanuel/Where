@@ -82,7 +82,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         return self.locationManager.authorizationStatus == .authorizedWhenInUse || self.locationManager.authorizationStatus == .authorizedAlways
     }
     
-    private func withoutPermission() {
+    private func showWithoutPermissionAlert() {
         let alert = UIAlertController(title: "Location denied", message: "Please, go to settings and enable location permission for Where app", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alert.addAction(okAction)
@@ -96,6 +96,32 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.mapView.addOverlay(overlay)
     }
     
+    private func restart() {
+        self.mapView.removeOverlays(self.mapView.overlays)
+        self.workout.clear()
+    }
+    
+    private func save() {
+        
+    }
+    
+    private func showSaveRouteALert() {
+        let alert = UIAlertController(title: "Would you like to this route?", message: "", preferredStyle: .alert)
+    
+        let yesAction = UIAlertAction(title: "YES", style: .default, handler: { _ in
+            self.save()
+        })
+        
+        let noAction = UIAlertAction(title: "NO", style: .destructive, handler: { _ in
+            self.restart()
+        })
+        
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func playButtonPressed(_ sender: Any) {
         let isAuthorized = self.deviceLocationIsAuthorized()
         if isAuthorized {
@@ -106,15 +132,16 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             self.animateButtons()
             self.isRecording = true
         } else {
-            self.withoutPermission()
+            self.showWithoutPermissionAlert()
         }
     }
     
     @IBAction func stopButtonPressed(_ sender: Any) {
-        print("stop")
         self.locationManager.stopUpdatingLocation()
         self.animateButtons()
         self.isRecording = false
+        
+        self.showSaveRouteALert()
         print(self.workout)
     }
     

@@ -23,4 +23,10 @@ class Workout {
         self.discante += (lastLocation.distance(from: location) / 1000.0)
         self.route.append(location.coordinate)
     }
+    
+    func clear() {
+        self.route = []
+        self.discante = 0
+        self.lastLocation = nil
+    }
 }
