@@ -18,8 +18,11 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     private var isRecording = false
     private var shouldCenterLocation = false
+    private var shouldShowAllOtherRoutes = false
     private var lastLocation: CLLocation?
     private var workout = Workout()
+    private var oldWorkouts: [Workout] = []
+    private var routeOverlay: CustonPolyline? = nil
     
     private let locationManager = CLLocationManager()
     
@@ -89,16 +92,23 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.present(alert, animated: true, completion: nil)
     }
     
-    private func updateMapViewWithCurrentRoute() {
-        self.mapView.removeOverlays(self.mapView.overlays)
-        let overlay = CustonPolyline(coordinates: self.workout.route, count: self.workout.route.count)
-        overlay.color = UIColor.blue.withAlphaComponent(0.9)
-        self.mapView.addOverlay(overlay)
+    private func updateMapView() {
+        if let overlay = self.routeOverlay {
+            self.mapView.removeOverlay(overlay)
+        }
+        
+        self.routeOverlay = CustonPolyline(coordinates: self.workout.route, count: self.workout.route.count)
+        self.routeOverlay?.color = UIColor.blue.withAlphaComponent(0.9)
+        self.mapView.addOverlay(self.routeOverlay!)
     }
     
     private func restart() {
-        self.mapView.removeOverlays(self.mapView.overlays)
         self.workout.clear()
+        self.updateMapView()
+        
+        if self.shouldShowAllOtherRoutes {
+            self.configOldersWorkouts()
+        }
     }
     
     private func save() {
@@ -132,6 +142,37 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.present(alert, animated: true, completion: nil)
     }
     
+    private func configOldersWorkouts() {
+        let activities = DatabaseHelper.shared.getAllActivities()
+        let workouts = activities.map(self.convertActivityToWorkout(activity:))
+        self.oldWorkouts = workouts
+        
+        let overlays = self.oldWorkouts.map(self.workoutToPolylineOveraly(workout:))
+        
+        self.shouldShowAllOtherRoutes = true
+        self.mapView.addOverlays(overlays)
+    }
+    
+    private func convertActivityToWorkout(activity: Activity) -> Workout {
+        let workout = Workout()
+        
+        guard let locations: NSOrderedSet = activity.locations,
+        let locationsArray = locations.array as? [Location] else {
+            return workout
+        }
+        
+        let workoutRoute = locationsArray.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) })
+        workout.route = workoutRoute
+        
+        return workout
+    }
+    
+    private func workoutToPolylineOveraly(workout: Workout) -> CustonPolyline {
+        let overlay = CustonPolyline(coordinates: workout.route, count: workout.route.count)
+        overlay.color = UIColor.yellow.withAlphaComponent(0.9)
+        return overlay
+    }
+    
     @IBAction func playButtonPressed(_ sender: Any) {
         let isAuthorized = self.deviceLocationIsAuthorized()
         if isAuthorized {
@@ -147,11 +188,11 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     @IBAction func mapVisualizationDidChange(_ sender: UISegmentedControl) {
+        self.updateMapView()
         if sender.selectedSegmentIndex == 0 {
-            
+            self.shouldShowAllOtherRoutes = false
         } else {
-            let activities = DatabaseHelper.shared.getAllActivities()
-            print(activities)
+            self.configOldersWorkouts()
         }
     }
     
@@ -196,10 +237,10 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         if let location = locations.last, self.shouldCenterLocation {
             self.centerInMap(for: location.coordinate)
             self.workout.updateWithNextLocation(nextLocation: location)
-            self.updateMapViewWithCurrentRoute()
+            self.updateMapView()
             
             if self.isRecording {
-                self.updateMapViewWithCurrentRoute()
+                self.updateMapView()
             }
             
             self.lastLocation = location
@@ -212,7 +253,8 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     //MARK: - MKMapViewDelegate
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        if (!self.isRecording) {
+        print("draw route")
+        if (!self.isRecording && !self.shouldShowAllOtherRoutes) {
             return MKOverlayRenderer()
         }
         
