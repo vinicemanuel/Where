@@ -9,8 +9,9 @@ import UIKit
 import MapKit
 import CoreLocation
 import CoreData
+import Combine
 
-class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class RecordViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var stopButton: UIButton!
@@ -23,25 +24,36 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     private var workout = Workout()
     private var oldWorkouts: [Workout] = []
     private var routeOverlay: CustonPolyline? = nil
-    
-    private let locationManager = CLLocationManager()
+    private var subscriptions = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.configLocationManager()
+        LocationManager.shared.subscribe().sink { locations in
+            if let location = locations.last, self.shouldCenterLocation {
+                self.centerInMap(for: location.coordinate)
+                self.workout.updateWithNextLocation(nextLocation: location)
+                self.updateMapView()
+                
+                if self.isRecording {
+                    self.updateMapView()
+                }
+                
+                self.lastLocation = location
+            }
+        }
+        .store(in: &subscriptions)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.stopButton.alpha = 0
-        self.requestLocation()
+        LocationManager.shared.requestLocationAuthorization()
+        self.configMap()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        self.configMap()
     }
     
     private func animateButtons() {
@@ -58,30 +70,18 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     private func configMap() {
         self.mapView.showsUserLocation = true
-        self.mapView.setCameraZoomRange(MKMapView.CameraZoomRange(minCenterCoordinateDistance: 100, maxCenterCoordinateDistance: 10000), animated: true)
+        
         self.mapView.delegate = self
         
         self.shouldCenterLocation = true
-        self.locationManager.requestLocation()
-    }
-    
-    private func configLocationManager() {
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        LocationManager.shared.locationManager.requestLocation()
     }
     
     private func centerInMap(for location: CLLocationCoordinate2D) {
-        let region = MKCoordinateRegion(center: location, latitudinalMeters: 50, longitudinalMeters: 50)
+        self.mapView.setCameraZoomRange(MKMapView.CameraZoomRange(minCenterCoordinateDistance: 100, maxCenterCoordinateDistance: 3000), animated: true)
+        let region = MKCoordinateRegion(center: location, latitudinalMeters: 100, longitudinalMeters: 100)
         self.mapView.setRegion(region, animated: true)
         self.mapView.setCenter(location, animated: true)
-    }
-    
-    private func requestLocation() {
-        self.locationManager.requestWhenInUseAuthorization()
-    }
-    
-    private func deviceLocationIsAuthorized() -> Bool {
-        return self.locationManager.authorizationStatus == .authorizedWhenInUse || self.locationManager.authorizationStatus == .authorizedAlways
     }
     
     private func showWithoutPermissionAlert() {
@@ -174,12 +174,12 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     @IBAction func playButtonPressed(_ sender: Any) {
-        let isAuthorized = self.deviceLocationIsAuthorized()
+        let isAuthorized = LocationManager.shared.deviceLocationIsAuthorized()
         if isAuthorized {
             if let location = self.lastLocation {
                 self.centerInMap(for: location.coordinate)
             }
-            self.locationManager.startUpdatingLocation()
+            LocationManager.shared.locationManager.startUpdatingLocation()
             self.animateButtons()
             self.isRecording = true
         } else {
@@ -197,7 +197,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     @IBAction func stopButtonPressed(_ sender: Any) {
-        self.locationManager.stopUpdatingLocation()
+        LocationManager.shared.locationManager.stopUpdatingLocation()
         self.animateButtons()
         self.isRecording = false
         
@@ -210,47 +210,9 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         if let location = self.lastLocation {
             self.centerInMap(for: location.coordinate)
         }
-        self.locationManager.requestLocation()
+        LocationManager.shared.locationManager.requestLocation()
     }
-    
-    //MARK: - CLLocationManagerDelegate
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-        case .authorizedWhenInUse, .authorizedAlways:
-            print("authorized")
-            
-        case .notDetermined:
-            self.requestLocation()
-            
-        case .denied:
-            print("location denied")
-            
-        case .restricted:
-            print("restricted")
-            
-        default:
-            print("default")
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last, self.shouldCenterLocation {
-            self.centerInMap(for: location.coordinate)
-            self.workout.updateWithNextLocation(nextLocation: location)
-            self.updateMapView()
-            
-            if self.isRecording {
-                self.updateMapView()
-            }
-            
-            self.lastLocation = location
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("error: \(error.localizedDescription)")
-    }
-    
+        
     //MARK: - MKMapViewDelegate
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         print("draw route")
