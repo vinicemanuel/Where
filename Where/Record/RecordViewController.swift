@@ -97,6 +97,10 @@ class RecordViewController: UIViewController, MKMapViewDelegate {
             self.mapView.removeOverlay(overlay)
         }
         
+        if self.shouldShowAllOtherRoutes == false {
+            self.mapView.removeOverlays(self.mapView.overlays)
+        }
+        
         self.routeOverlay = CustonPolyline(coordinates: self.workout.route, count: self.workout.route.count)
         self.routeOverlay?.color = UIColor.blue.withAlphaComponent(0.9)
         self.mapView.addOverlay(self.routeOverlay!)
@@ -188,9 +192,9 @@ class RecordViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func mapVisualizationDidChange(_ sender: UISegmentedControl) {
-        self.updateMapView()
         if sender.selectedSegmentIndex == 0 {
             self.shouldShowAllOtherRoutes = false
+            self.updateMapView()
         } else {
             self.configOldersWorkouts()
         }

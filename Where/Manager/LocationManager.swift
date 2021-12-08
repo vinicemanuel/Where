@@ -18,11 +18,14 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     private override init() {
         self.passthroughLocations = PassthroughSubject<[CLLocation], Never>()
         super.init()
+        
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.allowsBackgroundLocationUpdates = true
     }
     
     func requestLocationAuthorization() {
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
         self.locationManager.requestWhenInUseAuthorization()
     }
     
