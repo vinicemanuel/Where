@@ -15,10 +15,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var playPauseButton: UIButton!
-    @IBOutlet weak var verticalSpacePlayPause: NSLayoutConstraint!
     
-    private let hiddenStopButtonValue: CGFloat = -50
-    private let showStopButtonValue: CGFloat = 20
     private var isRecording = false
     private var shouldCenterLocation = false
     private var lastLocation: CLLocation?
@@ -34,7 +31,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.stopButton.alpha = 0
         self.requestLocation()
     }
     
@@ -45,13 +42,15 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     private func animateButtons() {
-         self.verticalSpacePlayPause.constant = self.isRecording ? self.hiddenStopButtonValue : self.showStopButtonValue
-        let alpha: CGFloat = self.isRecording ? 1 : 0
-         
          UIView.transition(with: self.playPauseButton, duration: 0.3, options: .transitionFlipFromBottom) {
-             self.playPauseButton.alpha = alpha
+             self.playPauseButton.alpha = self.isRecording ? 1 : 0
              self.view.layoutIfNeeded()
          }
+        
+        UIView.transition(with: self.playPauseButton, duration: 0.3, options: .transitionFlipFromTop) {
+            self.stopButton.alpha = self.isRecording ? 0 : 1
+            self.view.layoutIfNeeded()
+        }
      }
     
     private func configMap() {

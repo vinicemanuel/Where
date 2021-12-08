@@ -132,24 +132,6 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" pitchEnabled="NO" showsCompass="NO" showsScale="YES" showsTraffic="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SXz-r1-NKX">
                                 <rect key="frame" x="0.0" y="107" width="414" height="706"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1me-fA-s5R">
-                                <rect key="frame" x="334" y="733" width="50" height="50"/>
-                                <color key="backgroundColor" name="Backgroud"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="pHz-ga-ih5"/>
-                                    <constraint firstAttribute="width" constant="50" id="pvV-g6-anu"/>
-                                </constraints>
-                                <color key="tintColor" name="Icons"/>
-                                <state key="normal" image="stop.fill" catalog="system"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="stopButtonPressed:" destination="YQi-TD-Oxa" eventType="touchUpInside" id="ofe-L0-OQg"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G7F-O3-n1y">
                                 <rect key="frame" x="334" y="733" width="50" height="50"/>
                                 <color key="backgroundColor" name="Backgroud"/>
@@ -186,15 +168,33 @@
                                     <action selector="centerButtonPressed:" destination="YQi-TD-Oxa" eventType="touchUpInside" id="tio-Sb-n4j"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1me-fA-s5R">
+                                <rect key="frame" x="334" y="733" width="50" height="50"/>
+                                <color key="backgroundColor" name="Backgroud"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="pHz-ga-ih5"/>
+                                    <constraint firstAttribute="width" constant="50" id="pvV-g6-anu"/>
+                                </constraints>
+                                <color key="tintColor" name="Icons"/>
+                                <state key="normal" image="stop.fill" catalog="system"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="stopButtonPressed:" destination="YQi-TD-Oxa" eventType="touchUpInside" id="ofe-L0-OQg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BbE-Jn-QFg"/>
                         <color key="backgroundColor" name="Backgroud"/>
                         <constraints>
-                            <constraint firstItem="1me-fA-s5R" firstAttribute="centerX" secondItem="G7F-O3-n1y" secondAttribute="centerX" id="28z-0Y-vi6"/>
                             <constraint firstItem="LBx-9f-sDi" firstAttribute="leading" secondItem="BbE-Jn-QFg" secondAttribute="leading" constant="30" id="CMt-vT-dk9"/>
                             <constraint firstItem="BbE-Jn-QFg" firstAttribute="bottom" secondItem="SXz-r1-NKX" secondAttribute="bottom" id="JlD-iy-QzW"/>
                             <constraint firstItem="BbE-Jn-QFg" firstAttribute="trailing" secondItem="SXz-r1-NKX" secondAttribute="trailing" id="Jpg-nu-Fbx"/>
-                            <constraint firstItem="G7F-O3-n1y" firstAttribute="top" secondItem="1me-fA-s5R" secondAttribute="bottom" constant="-50" id="NiQ-tV-S7c"/>
+                            <constraint firstItem="1me-fA-s5R" firstAttribute="centerY" secondItem="G7F-O3-n1y" secondAttribute="centerY" id="KQw-uk-Kxc"/>
+                            <constraint firstItem="1me-fA-s5R" firstAttribute="centerX" secondItem="G7F-O3-n1y" secondAttribute="centerX" id="Nda-n1-p1D"/>
                             <constraint firstItem="YFy-Fq-9S8" firstAttribute="top" secondItem="BbE-Jn-QFg" secondAttribute="top" constant="12" id="Vla-7F-2Mg"/>
                             <constraint firstItem="BbE-Jn-QFg" firstAttribute="bottom" secondItem="LBx-9f-sDi" secondAttribute="bottom" constant="30" id="WUg-Fx-7zn"/>
                             <constraint firstItem="SXz-r1-NKX" firstAttribute="top" secondItem="YFy-Fq-9S8" secondAttribute="bottom" constant="20" id="YVj-q6-iEb"/>
@@ -210,7 +210,6 @@
                         <outlet property="playPauseButton" destination="G7F-O3-n1y" id="zTO-4r-pfw"/>
                         <outlet property="segmentedControl" destination="YFy-Fq-9S8" id="vsp-Dw-5er"/>
                         <outlet property="stopButton" destination="1me-fA-s5R" id="EHZ-ZK-d2W"/>
-                        <outlet property="verticalSpacePlayPause" destination="NiQ-tV-S7c" id="PAf-UU-Q6z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p4b-lk-oG4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
