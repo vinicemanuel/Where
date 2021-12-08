@@ -18,8 +18,7 @@ class Workout {
             self.lastLocation = location
             return
         }
-
-        print(self.discante)
+        
         self.discante += (lastLocation.distance(from: location) / 1000.0)
         self.route.append(location.coordinate)
     }

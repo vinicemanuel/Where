@@ -33,6 +33,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate {
             if let location = locations.last, self.shouldCenterLocation {
                 self.centerInMap(for: location.coordinate)
                 self.workout.updateWithNextLocation(nextLocation: location)
+                print(self.workout.route.count)
                 self.updateMapView()
                 
                 if self.isRecording {
@@ -46,10 +47,15 @@ class RecordViewController: UIViewController, MKMapViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear")
         super.viewWillAppear(animated)
         self.stopButton.alpha = 0
         LocationManager.shared.requestLocationAuthorization()
         self.configMap()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("viewWillDisappear")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -219,7 +225,6 @@ class RecordViewController: UIViewController, MKMapViewDelegate {
         
     //MARK: - MKMapViewDelegate
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        print("draw route")
         if (!self.isRecording && !self.shouldShowAllOtherRoutes) {
             return MKOverlayRenderer()
         }

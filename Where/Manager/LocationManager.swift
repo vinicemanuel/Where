@@ -1,5 +1,5 @@
 //
-//  LocationManager.swift
+//  WorkoutManager.swift
 //  Where
 //
 //  Created by Vinicius Silva on 08/12/21.
