@@ -9,8 +9,8 @@ import Foundation
 import CoreLocation
 import Combine
 
-class LocationManager: NSObject, CLLocationManagerDelegate {
-    static let shared = LocationManager()
+class WorkoutManager: NSObject, CLLocationManagerDelegate {
+    static let shared = WorkoutManager()
     
     let locationManager = CLLocationManager()
     private let passthroughLocations: PassthroughSubject<[CLLocation], Never>
@@ -25,7 +25,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func requestLocationAuthorization() {
-        
         self.locationManager.requestWhenInUseAuthorization()
     }
     

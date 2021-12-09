@@ -10,7 +10,7 @@
 		342EFD0A274DA82A00376997 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD09274DA82A00376997 /* DatabaseHelper.swift */; };
 		342EFD0C274DB02300376997 /* CustonPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD0B274DB02300376997 /* CustonPolyline.swift */; };
 		342EFD0F274DB80400376997 /* mapstogpx20211123_234720.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 342EFD0E274DB80400376997 /* mapstogpx20211123_234720.gpx */; };
-		342EFD1227612C4700376997 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD1127612C4700376997 /* LocationManager.swift */; };
+		342EFD1227612C4700376997 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD1127612C4700376997 /* WorkoutManager.swift */; };
 		34300595273B39C9004C0D27 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300594273B39C9004C0D27 /* ActivityTableViewCell.swift */; };
 		348350552747177200CDD898 /* Where.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 348350532747177200CDD898 /* Where.xcdatamodeld */; };
 		3483505727471A7E00CDD898 /* Workout .swift in Sources */ = {isa = PBXBuildFile; fileRef = 3483505627471A7E00CDD898 /* Workout .swift */; };
@@ -39,7 +39,7 @@
 		342EFD09274DA82A00376997 /* DatabaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
 		342EFD0B274DB02300376997 /* CustonPolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustonPolyline.swift; sourceTree = "<group>"; };
 		342EFD0E274DB80400376997 /* mapstogpx20211123_234720.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mapstogpx20211123_234720.gpx; sourceTree = "<group>"; };
-		342EFD1127612C4700376997 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		342EFD1127612C4700376997 /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
 		34300594273B39C9004C0D27 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		348350542747177200CDD898 /* Where.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Where.xcdatamodel; sourceTree = "<group>"; };
 		3483505627471A7E00CDD898 /* Workout .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout .swift"; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 		342EFD1027612BF800376997 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				342EFD1127612C4700376997 /* LocationManager.swift */,
+				342EFD1127612C4700376997 /* WorkoutManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -294,7 +294,7 @@
 				348AF4FB2739E839003D0B00 /* RecordViewController.swift in Sources */,
 				342EFD0A274DA82A00376997 /* DatabaseHelper.swift in Sources */,
 				348AF5002739EE61003D0B00 /* Colors.swift in Sources */,
-				342EFD1227612C4700376997 /* LocationManager.swift in Sources */,
+				342EFD1227612C4700376997 /* WorkoutManager.swift in Sources */,
 				342EFD0C274DB02300376997 /* CustonPolyline.swift in Sources */,
 				34300595273B39C9004C0D27 /* ActivityTableViewCell.swift in Sources */,
 				348350552747177200CDD898 /* Where.xcdatamodeld in Sources */,

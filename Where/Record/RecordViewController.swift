@@ -11,11 +11,13 @@ import CoreLocation
 import CoreData
 import Combine
 
-class RecordViewController: UIViewController, MKMapViewDelegate {
+class RecordViewController: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var playPauseButton: UIButton!
+    
+    let locationManager = CLLocationManager()
     
     private var isRecording = false
     private var shouldCenterLocation = false
@@ -29,7 +31,9 @@ class RecordViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        LocationManager.shared.subscribe().sink { locations in
+        self.configLocationManager()
+        
+        WorkoutManager.shared.subscribe().sink { locations in
             if let location = locations.last, self.shouldCenterLocation {
                 self.centerInMap(for: location.coordinate)
                 self.workout.updateWithNextLocation(nextLocation: location)
@@ -47,19 +51,20 @@ class RecordViewController: UIViewController, MKMapViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear")
         super.viewWillAppear(animated)
         self.stopButton.alpha = 0
-        LocationManager.shared.requestLocationAuthorization()
-        self.configMap()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        print("viewWillDisappear")
+        WorkoutManager.shared.requestLocationAuthorization()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.configMap()
+    }
+    
+    private func configLocationManager() {
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
     private func animateButtons() {
@@ -80,12 +85,12 @@ class RecordViewController: UIViewController, MKMapViewDelegate {
         self.mapView.delegate = self
         
         self.shouldCenterLocation = true
-        LocationManager.shared.locationManager.requestLocation()
+        self.locationManager.startUpdatingLocation()
     }
     
     private func centerInMap(for location: CLLocationCoordinate2D) {
-        self.mapView.setCameraZoomRange(MKMapView.CameraZoomRange(minCenterCoordinateDistance: 100, maxCenterCoordinateDistance: 3000), animated: true)
-        let region = MKCoordinateRegion(center: location, latitudinalMeters: 100, longitudinalMeters: 100)
+        self.mapView.setCameraZoomRange(MKMapView.CameraZoomRange(minCenterCoordinateDistance: 500, maxCenterCoordinateDistance: 5000), animated: true)
+        let region = MKCoordinateRegion(center: location, latitudinalMeters: 500, longitudinalMeters: 500)
         self.mapView.setRegion(region, animated: true)
         self.mapView.setCenter(location, animated: true)
     }
@@ -184,12 +189,12 @@ class RecordViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func playButtonPressed(_ sender: Any) {
-        let isAuthorized = LocationManager.shared.deviceLocationIsAuthorized()
+        let isAuthorized = WorkoutManager.shared.deviceLocationIsAuthorized()
         if isAuthorized {
             if let location = self.lastLocation {
                 self.centerInMap(for: location.coordinate)
             }
-            LocationManager.shared.locationManager.startUpdatingLocation()
+            WorkoutManager.shared.locationManager.startUpdatingLocation()
             self.animateButtons()
             self.isRecording = true
         } else {
@@ -207,7 +212,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func stopButtonPressed(_ sender: Any) {
-        LocationManager.shared.locationManager.stopUpdatingLocation()
+        WorkoutManager.shared.locationManager.stopUpdatingLocation()
         self.animateButtons()
         self.isRecording = false
         
@@ -220,7 +225,21 @@ class RecordViewController: UIViewController, MKMapViewDelegate {
         if let location = self.lastLocation {
             self.centerInMap(for: location.coordinate)
         }
-        LocationManager.shared.locationManager.requestLocation()
+        self.locationManager.startUpdatingLocation()
+    }
+    
+    //MARK: - CLLocationManagerDelegate
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last, self.shouldCenterLocation {
+            self.centerInMap(for: location.coordinate)
+            self.updateMapView()
+            self.lastLocation = location
+            self.locationManager.stopUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("error: \(error.localizedDescription)")
     }
         
     //MARK: - MKMapViewDelegate
