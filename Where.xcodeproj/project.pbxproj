@@ -11,6 +11,7 @@
 		342EFD0C274DB02300376997 /* CustonPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD0B274DB02300376997 /* CustonPolyline.swift */; };
 		342EFD0F274DB80400376997 /* mapstogpx20211123_234720.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 342EFD0E274DB80400376997 /* mapstogpx20211123_234720.gpx */; };
 		342EFD1227612C4700376997 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD1127612C4700376997 /* WorkoutManager.swift */; };
+		342EFD152762CE8C00376997 /* ActivitiesMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD142762CE8C00376997 /* ActivitiesMapViewController.swift */; };
 		34300595273B39C9004C0D27 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300594273B39C9004C0D27 /* ActivityTableViewCell.swift */; };
 		348350552747177200CDD898 /* Where.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 348350532747177200CDD898 /* Where.xcdatamodeld */; };
 		3483505727471A7E00CDD898 /* Workout .swift in Sources */ = {isa = PBXBuildFile; fileRef = 3483505627471A7E00CDD898 /* Workout .swift */; };
@@ -40,6 +41,7 @@
 		342EFD0B274DB02300376997 /* CustonPolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustonPolyline.swift; sourceTree = "<group>"; };
 		342EFD0E274DB80400376997 /* mapstogpx20211123_234720.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mapstogpx20211123_234720.gpx; sourceTree = "<group>"; };
 		342EFD1127612C4700376997 /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
+		342EFD142762CE8C00376997 /* ActivitiesMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesMapViewController.swift; sourceTree = "<group>"; };
 		34300594273B39C9004C0D27 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		348350542747177200CDD898 /* Where.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Where.xcdatamodel; sourceTree = "<group>"; };
 		3483505627471A7E00CDD898 /* Workout .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout .swift"; sourceTree = "<group>"; };
@@ -92,6 +94,14 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		342EFD132762CE5200376997 /* ActivitiesMap */ = {
+			isa = PBXGroup;
+			children = (
+				342EFD142762CE8C00376997 /* ActivitiesMapViewController.swift */,
+			);
+			path = ActivitiesMap;
+			sourceTree = "<group>";
+		};
 		34300593273B37EE004C0D27 /* ActivityCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,13 +149,14 @@
 		348AF4C62739DB7E003D0B00 /* Where */ = {
 			isa = PBXGroup;
 			children = (
-				342EFD1027612BF800376997 /* Manager */,
-				342EFD08274DA81400376997 /* Helper */,
-				348350522747175600CDD898 /* Resources */,
-				3483504F27447AE400CDD898 /* Model */,
+				342EFD132762CE5200376997 /* ActivitiesMap */,
 				348AF501273B2A59003D0B00 /* Activities */,
-				348AF4FE2739EE54003D0B00 /* General */,
 				348AF4F92739E818003D0B00 /* Record */,
+				348AF4FE2739EE54003D0B00 /* General */,
+				348350522747175600CDD898 /* Resources */,
+				342EFD08274DA81400376997 /* Helper */,
+				3483504F27447AE400CDD898 /* Model */,
+				342EFD1027612BF800376997 /* Manager */,
 				348AF4C72739DB7E003D0B00 /* AppDelegate.swift */,
 				348AF4C92739DB7E003D0B00 /* SceneDelegate.swift */,
 				348AF4CD2739DB7E003D0B00 /* Main.storyboard */,
@@ -293,6 +304,7 @@
 			files = (
 				348AF4FB2739E839003D0B00 /* RecordViewController.swift in Sources */,
 				342EFD0A274DA82A00376997 /* DatabaseHelper.swift in Sources */,
+				342EFD152762CE8C00376997 /* ActivitiesMapViewController.swift in Sources */,
 				348AF5002739EE61003D0B00 /* Colors.swift in Sources */,
 				342EFD1227612C4700376997 /* WorkoutManager.swift in Sources */,
 				342EFD0C274DB02300376997 /* CustonPolyline.swift in Sources */,

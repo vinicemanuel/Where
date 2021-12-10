@@ -13,14 +13,28 @@
         <!--Map-->
         <scene sceneID="hLM-8s-SeI">
             <objects>
-                <viewController id="0bB-eH-TSq" sceneMemberID="viewController">
+                <viewController id="0bB-eH-TSq" customClass="ActivitiesMapViewController" customModule="Where" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lnd-aU-dxt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lPc-Bq-PKh">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                            </mapView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="niB-mk-oPQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lPc-Bq-PKh" firstAttribute="top" secondItem="lnd-aU-dxt" secondAttribute="top" id="Abm-6J-3zi"/>
+                            <constraint firstItem="niB-mk-oPQ" firstAttribute="trailing" secondItem="lPc-Bq-PKh" secondAttribute="trailing" id="L6I-jO-9vA"/>
+                            <constraint firstItem="lPc-Bq-PKh" firstAttribute="leading" secondItem="niB-mk-oPQ" secondAttribute="leading" id="SSc-6N-Ftk"/>
+                            <constraint firstItem="niB-mk-oPQ" firstAttribute="bottom" secondItem="lPc-Bq-PKh" secondAttribute="bottom" id="aoU-F7-F6N"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="map.fill" catalog="system" landscapeImage="map.fill" id="lIL-HK-STN"/>
+                    <connections>
+                        <outlet property="mapView" destination="lPc-Bq-PKh" id="J5i-dq-aQ3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W9X-4k-3Ib" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
