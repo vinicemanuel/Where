@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		342EFD0A274DA82A00376997 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD09274DA82A00376997 /* DatabaseHelper.swift */; };
+		342EFD0A274DA82A00376997 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD09274DA82A00376997 /* DatabaseManager.swift */; };
 		342EFD0C274DB02300376997 /* CustonPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD0B274DB02300376997 /* CustonPolyline.swift */; };
 		342EFD0F274DB80400376997 /* mapstogpx20211123_234720.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 342EFD0E274DB80400376997 /* mapstogpx20211123_234720.gpx */; };
 		342EFD1227612C4700376997 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD1127612C4700376997 /* WorkoutManager.swift */; };
@@ -37,7 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		342EFD09274DA82A00376997 /* DatabaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
+		342EFD09274DA82A00376997 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		342EFD0B274DB02300376997 /* CustonPolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustonPolyline.swift; sourceTree = "<group>"; };
 		342EFD0E274DB80400376997 /* mapstogpx20211123_234720.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mapstogpx20211123_234720.gpx; sourceTree = "<group>"; };
 		342EFD1127612C4700376997 /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
@@ -78,17 +78,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		342EFD08274DA81400376997 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				342EFD09274DA82A00376997 /* DatabaseHelper.swift */,
-			);
-			path = Helper;
-			sourceTree = "<group>";
-		};
 		342EFD1027612BF800376997 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				342EFD09274DA82A00376997 /* DatabaseManager.swift */,
 				342EFD1127612C4700376997 /* WorkoutManager.swift */,
 			);
 			path = Manager;
@@ -154,7 +147,6 @@
 				348AF4F92739E818003D0B00 /* Record */,
 				348AF4FE2739EE54003D0B00 /* General */,
 				348350522747175600CDD898 /* Resources */,
-				342EFD08274DA81400376997 /* Helper */,
 				3483504F27447AE400CDD898 /* Model */,
 				342EFD1027612BF800376997 /* Manager */,
 				348AF4C72739DB7E003D0B00 /* AppDelegate.swift */,
@@ -303,7 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				348AF4FB2739E839003D0B00 /* RecordViewController.swift in Sources */,
-				342EFD0A274DA82A00376997 /* DatabaseHelper.swift in Sources */,
+				342EFD0A274DA82A00376997 /* DatabaseManager.swift in Sources */,
 				342EFD152762CE8C00376997 /* ActivitiesMapViewController.swift in Sources */,
 				348AF5002739EE61003D0B00 /* Colors.swift in Sources */,
 				342EFD1227612C4700376997 /* WorkoutManager.swift in Sources */,

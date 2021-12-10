@@ -122,7 +122,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     private func save() {
-        DatabaseHelper.shared.saveWorkout(workout: self.workout)
+        DatabaseManager.shared.saveWorkout(workout: self.workout)
         self.showSavedAlert()
         self.restart()
     }
@@ -153,7 +153,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     private func configOldersWorkouts() {
-        let activities = DatabaseHelper.shared.getAllActivities()
+        let activities = DatabaseManager.shared.getAllActivities()
         let workouts = activities.map(self.convertActivityToWorkout(activity:))
         self.oldWorkouts = workouts
         

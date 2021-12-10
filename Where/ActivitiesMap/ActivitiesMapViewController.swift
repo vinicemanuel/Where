@@ -42,7 +42,7 @@ class ActivitiesMapViewController: UIViewController, CLLocationManagerDelegate, 
     }
     
     private func configOldersWorkouts() {
-        let activities = DatabaseHelper.shared.getAllActivities()
+        let activities = DatabaseManager.shared.getAllActivities()
         let workouts = activities.map(self.convertActivityToWorkout(activity:))
         
         let overlays = workouts.map(self.workoutToPolylineOveraly(workout:))

@@ -9,6 +9,7 @@ import UIKit
 
 class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
+    var activities: [Activity] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,9 +17,18 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         self.tableView.dataSource = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.activities = DatabaseManager.shared.getAllActivities()
+        self.tableView.reloadData()
+    }
+    
     //MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ActivityTableViewCell.cellID) as! ActivityTableViewCell
+        
+        let activity = self.activities[indexPath.section]
+        
+        cell.configWith(activity: activity)
         
         return cell
     }
@@ -39,6 +49,6 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
+        return self.activities.count
     }
 }

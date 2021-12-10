@@ -9,8 +9,8 @@ import Foundation
 import CoreData
 import CoreLocation
 
-class DatabaseHelper {
-    static let shared = DatabaseHelper()
+class DatabaseManager {
+    static let shared = DatabaseManager()
     
     private let persistentContainer: NSPersistentContainer
     
