@@ -7,6 +7,7 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class ActivityTableViewCell: UITableViewCell {
     @IBOutlet private weak var mapView: MKMapView!
@@ -24,6 +25,18 @@ class ActivityTableViewCell: UITableViewCell {
         } else {
             self.dateLabel.text = ""
         }
+        
+        if let locations: NSOrderedSet = activity.locations,
+           let locationsArray = locations.array as? [Location] {
+            let corelocations = locationsArray.map({CLLocation(latitude: $0.latitude, longitude: $0.longitude)})
+            var distance: Double = 0
+            for (first, second) in zip(corelocations, corelocations.dropFirst()) {
+                distance = distance + second.distance(from: first)
+            }
+            
+            self.distanceLabel.text = "\(String(format: "%.2f", (distance/1000))) Km"
+        }
+        
     }
     
     private func stringFromDate(date: Date) -> String {
