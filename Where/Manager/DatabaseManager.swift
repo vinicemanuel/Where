@@ -49,6 +49,8 @@ class DatabaseManager {
     func getAllActivities() -> [Activity] {
         let context = self.persistentContainer.viewContext
         let request = Activity.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+        request.sortDescriptors = [sortDescriptor]
         
         var result: [Activity] = []
         
