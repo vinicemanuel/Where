@@ -47,11 +47,11 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             }
         }
         .store(in: &subscriptions)
+        self.stopButton.alpha = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.stopButton.alpha = 0
         WorkoutManager.shared.requestLocationAuthorization()
         
     }
