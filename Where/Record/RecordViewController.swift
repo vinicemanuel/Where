@@ -136,18 +136,27 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     private func showSaveRouteALert() {
-        let alert = UIAlertController(title: "Would you like to save this route?", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Would you like to save this route?", message: "", preferredStyle: .actionSheet)
     
-        let yesAction = UIAlertAction(title: "YES", style: .default, handler: { _ in
+        let saveAction = UIAlertAction(title: "Save", style: .default, handler: { _ in
+            WorkoutManager.shared.locationManager.stopUpdatingLocation()
+            self.animateButtons()
+            self.isRecording = false
             self.save()
         })
         
-        let noAction = UIAlertAction(title: "NO", style: .destructive, handler: { _ in
+        let discartAction = UIAlertAction(title: "Discart", style: .default, handler: { _ in
+            WorkoutManager.shared.locationManager.stopUpdatingLocation()
+            self.animateButtons()
+            self.isRecording = false
             self.restart()
         })
         
-        alert.addAction(yesAction)
-        alert.addAction(noAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
+        
+        alert.addAction(saveAction)
+        alert.addAction(discartAction)
+        alert.addAction(cancelAction)
         
         self.present(alert, animated: true, completion: nil)
     }
@@ -207,10 +216,6 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     @IBAction func stopButtonPressed(_ sender: Any) {
-        WorkoutManager.shared.locationManager.stopUpdatingLocation()
-        self.animateButtons()
-        self.isRecording = false
-        
         self.showSaveRouteALert()
         print(self.workout)
     }
