@@ -47,8 +47,23 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.activities.count
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let activity = self.activities[indexPath.section]
+            let deleted = DatabaseManager.shared.delete(activity: activity)
+            if deleted {
+                self.activities.remove(at: indexPath.section)
+                self.tableView.deleteSections(IndexSet(integer: indexPath.section), with: .fade)
+            }
+        }
     }
 }

@@ -42,6 +42,8 @@ class ActivitiesMapViewController: UIViewController, CLLocationManagerDelegate, 
     }
     
     private func configOldersWorkouts() {
+        self.mapView.removeOverlays(self.mapView.overlays)
+        
         let activities = DatabaseManager.shared.getAllActivities()
         let workouts = activities.map(self.convertActivityToWorkout(activity:))
         

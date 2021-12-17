@@ -62,4 +62,20 @@ class DatabaseManager {
         
         return result
     }
+    
+    func delete(activity: Activity) -> Bool {
+        let context = self.persistentContainer.viewContext
+        context.delete(activity)
+        
+        var result: Bool = false
+        
+        do {
+            try context.save()
+            result = true
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        return result
+    }
 }
