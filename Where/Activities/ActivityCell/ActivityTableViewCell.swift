@@ -54,7 +54,7 @@ class ActivityTableViewCell: UITableViewCell, MKMapViewDelegate {
         let distanceMinMax = CLLocation(latitude: maxLat, longitude: maxLon).distance(from: CLLocation(latitude: minLat, longitude: minLon))
         
         let meanLocation = CLLocationCoordinate2D(latitude: meanlat, longitude: meanLon)
-        let region = MKCoordinateRegion(center: meanLocation, latitudinalMeters: distanceMinMax * 2, longitudinalMeters: distanceMinMax * 2)
+        let region = MKCoordinateRegion(center: meanLocation, latitudinalMeters: distanceMinMax * 1.2, longitudinalMeters: distanceMinMax * 1.2)
         self.mapView.setRegion(region, animated: false)
         
         var distance: Double = 0

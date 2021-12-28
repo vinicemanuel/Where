@@ -145,7 +145,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             self.save()
         })
         
-        let discartAction = UIAlertAction(title: "Discart", style: .default, handler: { _ in
+        let discardAction = UIAlertAction(title: "Discard", style: .default, handler: { _ in
             WorkoutManager.shared.locationManager.stopUpdatingLocation()
             self.animateButtons()
             self.isRecording = false
@@ -155,7 +155,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
         
         alert.addAction(saveAction)
-        alert.addAction(discartAction)
+        alert.addAction(discardAction)
         alert.addAction(cancelAction)
         
         self.present(alert, animated: true, completion: nil)
