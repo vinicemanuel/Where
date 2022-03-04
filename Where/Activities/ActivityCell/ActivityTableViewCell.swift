@@ -65,7 +65,7 @@ class ActivityTableViewCell: UITableViewCell, MKMapViewDelegate {
         self.distanceLabel.text = "\(String(format: "%.2f", (distance/1000))) Km"
         
         let overlay = CustonPolyline(coordinates: clLocationCoordinate2Ds, count: clLocationCoordinate2Ds.count)
-        overlay.color = UIColor.yellow.withAlphaComponent(0.9)
+        overlay.color = Colors.oldRoutesColor
         
         self.mapView.removeOverlays(self.mapView.overlays)
         self.mapView.addOverlay(overlay)

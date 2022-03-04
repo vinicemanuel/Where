@@ -54,7 +54,7 @@ class ActivitiesMapViewController: UIViewController, CLLocationManagerDelegate, 
     
     private func workoutToPolylineOveraly(workout: Workout) -> CustonPolyline {
         let overlay = CustonPolyline(coordinates: workout.route, count: workout.route.count)
-        overlay.color = UIColor.yellow.withAlphaComponent(0.9)
+        overlay.color = Colors.oldRoutesColor
         return overlay
     }
     
