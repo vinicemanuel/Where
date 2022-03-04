@@ -11,59 +11,44 @@ import CoreLocation
 import CoreData
 import Combine
 
-class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class RecordViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var playPauseButton: UIButton!
     
-    let locationManager = CLLocationManager()
-    
     private var isRecording = false
     private var shouldShowAllOtherRoutes = false
-    private var lastLocation: CLLocation?
-    private var workout = Workout()
-    private var oldWorkouts: [Workout] = []
     private var routeOverlay: CustonPolyline? = nil
-    private var subscriptions = Set<AnyCancellable>()
+    
+    var viewModelDelegate: RecordViewModelProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.configLocationManager()
+        self.viewModelDelegate = RecordViewModel()
         
-        WorkoutManager.shared.subscribe().sink { locations in
+        self.viewModelDelegate.config { locations in
             if let location = locations.last {
                 self.centerInMap(for: location.coordinate)
-                self.workout.updateWithNextLocation(nextLocation: location)
-                print(self.workout.route.count)
                 self.updateMapView()
-                
                 if self.isRecording {
                     self.updateMapView()
                 }
-                
-                self.lastLocation = location
             }
         }
-        .store(in: &subscriptions)
+        
         self.stopButton.alpha = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        WorkoutManager.shared.requestLocationAuthorization()
-        
+        self.viewModelDelegate.requestLocationAuthorization()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.configMap()
-    }
-    
-    private func configLocationManager() {
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
     private func animateButtons() {
@@ -81,7 +66,9 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     private func configMap() {
         self.mapView.showsUserLocation = true
         self.mapView.delegate = self
-        self.locationManager.startUpdatingLocation()
+        self.viewModelDelegate.updateLastLocation { location in
+            self.updateMapView(with: location)
+        }
     }
     
     private func centerInMap(for location: CLLocationCoordinate2D) {
@@ -107,13 +94,18 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             self.mapView.removeOverlays(self.mapView.overlays)
         }
         
-        self.routeOverlay = CustonPolyline(coordinates: self.workout.route, count: self.workout.route.count)
-        self.routeOverlay?.color = UIColor.blue.withAlphaComponent(0.9)
+        self.routeOverlay = self.viewModelDelegate.getCurrentRouteOverlay()
+        self.routeOverlay?.color = Colors.currentRouteColor
         self.mapView.addOverlay(self.routeOverlay!)
     }
     
+    private func updateMapView(with location: CLLocation) {
+        self.centerInMap(for: location.coordinate)
+        self.updateMapView()
+    }
+    
     private func restart() {
-        self.workout.clear()
+        self.viewModelDelegate.discartCurrentWorkout()
         self.updateMapView()
         
         if self.shouldShowAllOtherRoutes {
@@ -122,7 +114,7 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     private func save() {
-        DatabaseManager.shared.saveWorkout(workout: self.workout)
+        self.viewModelDelegate.saveCurrentWorkout()
         self.showSavedAlert()
         self.restart()
     }
@@ -139,14 +131,14 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let alert = UIAlertController(title: "Would you like to save this route?", message: "", preferredStyle: .actionSheet)
     
         let saveAction = UIAlertAction(title: "Save", style: .default, handler: { _ in
-            WorkoutManager.shared.locationManager.stopUpdatingLocation()
+            self.viewModelDelegate.stopRecordWorkout()
             self.animateButtons()
             self.isRecording = false
             self.save()
         })
         
         let discardAction = UIAlertAction(title: "Discard", style: .default, handler: { _ in
-            WorkoutManager.shared.locationManager.stopUpdatingLocation()
+            self.viewModelDelegate.stopRecordWorkout()
             self.animateButtons()
             self.isRecording = false
             self.restart()
@@ -162,43 +154,23 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     private func configOldersWorkouts() {
-        let activities = DatabaseManager.shared.getAllActivities()
-        let workouts = activities.map(self.convertActivityToWorkout(activity:))
-        self.oldWorkouts = workouts
+        let overlays = self.viewModelDelegate.getOldRouteOverlay()
         
-        let overlays = self.oldWorkouts.map(self.workoutToPolylineOveraly(workout:))
+        for overlay in overlays {
+            overlay.color = Colors.oldRoutesColor
+        }
         
         self.shouldShowAllOtherRoutes = true
         self.mapView.addOverlays(overlays)
     }
     
-    private func convertActivityToWorkout(activity: Activity) -> Workout {
-        let workout = Workout()
-        
-        guard let locations: NSOrderedSet = activity.locations,
-        let locationsArray = locations.array as? [Location] else {
-            return workout
-        }
-        
-        let workoutRoute = locationsArray.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) })
-        workout.route = workoutRoute
-        
-        return workout
-    }
-    
-    private func workoutToPolylineOveraly(workout: Workout) -> CustonPolyline {
-        let overlay = CustonPolyline(coordinates: workout.route, count: workout.route.count)
-        overlay.color = UIColor.yellow.withAlphaComponent(0.9)
-        return overlay
-    }
-    
     @IBAction func playButtonPressed(_ sender: Any) {
-        let isAuthorized = WorkoutManager.shared.deviceLocationIsAuthorized()
+        let isAuthorized = self.viewModelDelegate.isDeviceLocationIsAuthorized()
         if isAuthorized {
-            if let location = self.lastLocation {
+            if let location = self.viewModelDelegate.lastRegisteredLocation {
                 self.centerInMap(for: location.coordinate)
             }
-            WorkoutManager.shared.locationManager.startUpdatingLocation()
+            self.viewModelDelegate.startRecordWorkout()
             self.animateButtons()
             self.isRecording = true
         } else {
@@ -217,28 +189,16 @@ class RecordViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     @IBAction func stopButtonPressed(_ sender: Any) {
         self.showSaveRouteALert()
-        print(self.workout)
     }
     
     @IBAction func centerButtonPressed(_ sender: Any) {
-        if let location = self.lastLocation {
+        if let location = self.viewModelDelegate.lastRegisteredLocation {
             self.centerInMap(for: location.coordinate)
         }
-        self.locationManager.startUpdatingLocation()
-    }
-    
-    //MARK: - CLLocationManagerDelegate
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            self.centerInMap(for: location.coordinate)
-            self.updateMapView()
-            self.lastLocation = location
-            self.locationManager.stopUpdatingLocation()
+        
+        self.viewModelDelegate.updateLastLocation { location in
+            self.updateMapView(with: location)
         }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("error: \(error.localizedDescription)")
     }
         
     //MARK: - MKMapViewDelegate
