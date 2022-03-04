@@ -9,16 +9,16 @@ import UIKit
 
 class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
-    var activities: [Activity] = []
+    var viewModelDelegate: ActivitiesViewModelProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewModelDelegate = ActivitiesViewModel()
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.activities = DatabaseManager.shared.getAllActivities()
         self.tableView.reloadData()
     }
     
@@ -26,7 +26,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ActivityTableViewCell.cellID) as! ActivityTableViewCell
         
-        let activity = self.activities[indexPath.section]
+        let activity = self.viewModelDelegate.activities[indexPath.section]
         
         cell.configWith(activity: activity)
         
@@ -49,7 +49,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.activities.count
+        return self.viewModelDelegate.activities.count
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -58,10 +58,9 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let activity = self.activities[indexPath.section]
-            let deleted = DatabaseManager.shared.delete(activity: activity)
+            let activity = self.viewModelDelegate.activities[indexPath.section]
+            let deleted = self.viewModelDelegate.deleteActicity(activity: activity)
             if deleted {
-                self.activities.remove(at: indexPath.section)
                 self.tableView.deleteSections(IndexSet(integer: indexPath.section), with: .fade)
             }
         }

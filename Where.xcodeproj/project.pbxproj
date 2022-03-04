@@ -14,6 +14,7 @@
 		342EFD152762CE8C00376997 /* ActivitiesMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD142762CE8C00376997 /* ActivitiesMapViewController.swift */; };
 		34300595273B39C9004C0D27 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300594273B39C9004C0D27 /* ActivityTableViewCell.swift */; };
 		3450F26B27D2CCD6004E7266 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F26A27D2CCD6004E7266 /* RecordViewModel.swift */; };
+		3450F26D27D2DD42004E7266 /* ActivitiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F26C27D2DD42004E7266 /* ActivitiesViewModel.swift */; };
 		348350552747177200CDD898 /* Where.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 348350532747177200CDD898 /* Where.xcdatamodeld */; };
 		3483505727471A7E00CDD898 /* Workout .swift in Sources */ = {isa = PBXBuildFile; fileRef = 3483505627471A7E00CDD898 /* Workout .swift */; };
 		348AF4C82739DB7E003D0B00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348AF4C72739DB7E003D0B00 /* AppDelegate.swift */; };
@@ -45,6 +46,7 @@
 		342EFD142762CE8C00376997 /* ActivitiesMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesMapViewController.swift; sourceTree = "<group>"; };
 		34300594273B39C9004C0D27 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		3450F26A27D2CCD6004E7266 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
+		3450F26C27D2DD42004E7266 /* ActivitiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewModel.swift; sourceTree = "<group>"; };
 		348350542747177200CDD898 /* Where.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Where.xcdatamodel; sourceTree = "<group>"; };
 		3483505627471A7E00CDD898 /* Workout .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout .swift"; sourceTree = "<group>"; };
 		348AF4C42739DB7E003D0B00 /* Where.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Where.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				34300593273B37EE004C0D27 /* ActivityCell */,
+				3450F26C27D2DD42004E7266 /* ActivitiesViewModel.swift */,
 				348AF502273B2A8B003D0B00 /* ActivitiesViewController.swift */,
 			);
 			path = Activities;
@@ -306,6 +309,7 @@
 				34300595273B39C9004C0D27 /* ActivityTableViewCell.swift in Sources */,
 				348350552747177200CDD898 /* Where.xcdatamodeld in Sources */,
 				3450F26B27D2CCD6004E7266 /* RecordViewModel.swift in Sources */,
+				3450F26D27D2DD42004E7266 /* ActivitiesViewModel.swift in Sources */,
 				3483505727471A7E00CDD898 /* Workout .swift in Sources */,
 				348AF503273B2A8C003D0B00 /* ActivitiesViewController.swift in Sources */,
 				348AF4C82739DB7E003D0B00 /* AppDelegate.swift in Sources */,
