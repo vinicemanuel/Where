@@ -6,28 +6,45 @@
 //
 
 import XCTest
+import CoreLocation
 @testable import Where
 
-class WhereTests: XCTestCase {
+class Test_Workout: XCTestCase {
+    
+    var workout: Workout!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        self.workout = Workout()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        self.workout = nil
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func test_updateWithNextLocation_firstLocation() throws {
+        self.workout.updateWithNextLocation(nextLocation: CLLocation(latitude: 0, longitude: 1))
+        
+        XCTAssertEqual(self.workout.discante, 0)
+        XCTAssertEqual(self.workout.route.count, 1)
+        XCTAssertEqual(self.workout.route.first?.latitude, 0)
+        XCTAssertEqual(self.workout.route.first?.longitude, 1)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_updateWithNextLocation_towOrMoreLocations() throws {
+        self.workout.updateWithNextLocation(nextLocation: CLLocation(latitude: 0, longitude: 0))
+        self.workout.updateWithNextLocation(nextLocation: CLLocation(latitude: 0, longitude: -1))
+        
+        XCTAssertGreaterThan(self.workout.discante, 0)//km
+        XCTAssertEqual(self.workout.route.count, 2)
     }
-
+    
+    func test_clear() {
+        self.workout.updateWithNextLocation(nextLocation: CLLocation(latitude: 0, longitude: 0))
+        self.workout.updateWithNextLocation(nextLocation: CLLocation(latitude: 0, longitude: -1))
+        
+        self.workout.clear()
+        
+        XCTAssertEqual(self.workout.route.count, 0)
+        XCTAssertEqual(self.workout.discante, 0)
+    }
 }
