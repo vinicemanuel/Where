@@ -124,7 +124,7 @@ class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDeleg
     }
     
     func saveCurrentWorkout() {
-        self.databaseManager.saveWorkout(workout: self.workout)
+        self.databaseManager.saveWorkout(workout: self.workout, date: Date())
     }
     
     func discartCurrentWorkout() {

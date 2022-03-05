@@ -10,7 +10,7 @@ import CoreData
 import CoreLocation
 
 protocol DatabaseProtocol {
-    func saveWorkout(workout: Workout)
+    func saveWorkout(workout: Workout, date: Date)
     func getAllActivities() -> [Activity]
     func delete(activity: Activity) -> Bool
 }
@@ -30,7 +30,7 @@ class DatabaseManager: DatabaseProtocol {
     }
     
     //MARK: - DatabaseProtocol
-    func saveWorkout(workout: Workout) {
+    func saveWorkout(workout: Workout, date: Date) {
         let context = self.persistentContainer.viewContext
         let activity = Activity(context: context)
         
@@ -43,7 +43,7 @@ class DatabaseManager: DatabaseProtocol {
         })
         
         activity.locations = NSOrderedSet(array: locations)
-        activity.date = Date()
+        activity.date = date
         activity.distance = workout.discante
         
         do {

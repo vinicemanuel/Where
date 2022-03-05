@@ -10,11 +10,10 @@ import CoreLocation
 @testable import Where
 
 class Fake_DatabaseManager: DatabaseProtocol {
-    
     var workouts: [Workout] = []
     
     //MARK: - DatabaseProtocol
-    func saveWorkout(workout: Workout) {
+    func saveWorkout(workout: Workout, date: Date) {
         workouts.append(workout)
     }
     
