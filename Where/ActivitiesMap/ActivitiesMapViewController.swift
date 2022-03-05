@@ -8,21 +8,22 @@
 import UIKit
 import MapKit
 
-class ActivitiesMapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class ActivitiesMapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
-    let locationManager = CLLocationManager()
     var modelView: ActivitiesMapViewModelProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.modelView = ActivitiesMapViewModel()
         self.configMap()
-        self.configLocationManager()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.modelView.askForLastLocation { location in
+            self.centerInMap(for: location.coordinate)
+        }
         self.configOldersWorkouts()
     }
     
@@ -31,58 +32,15 @@ class ActivitiesMapViewController: UIViewController, CLLocationManagerDelegate, 
         self.mapView.setRegion(region, animated: true)
     }
     
-    private func configLocationManager() {
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    }
-    
     private func configMap() {
         self.mapView.showsUserLocation = true
         self.mapView.delegate = self
-        self.locationManager.startUpdatingLocation()
     }
     
     private func configOldersWorkouts() {
         self.mapView.removeOverlays(self.mapView.overlays)
-        
-        let activities = DatabaseManager.shared.getAllActivities()
-        let workouts = activities.map(self.convertActivityToWorkout(activity:))
-        
-        let overlays = workouts.map(self.workoutToPolylineOveraly(workout:))
-        
+        let overlays = self.modelView.getOldRouteOverlay()
         self.mapView.addOverlays(overlays)
-    }
-    
-    private func workoutToPolylineOveraly(workout: Workout) -> CustonPolyline {
-        let overlay = CustonPolyline(coordinates: workout.route, count: workout.route.count)
-        overlay.color = Colors.oldRoutesColor
-        return overlay
-    }
-    
-    private func convertActivityToWorkout(activity: Activity) -> Workout {
-        let workout = Workout()
-        
-        guard let locations: NSOrderedSet = activity.locations,
-        let locationsArray = locations.array as? [Location] else {
-            return workout
-        }
-        
-        let workoutRoute = locationsArray.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) })
-        workout.route = workoutRoute
-        
-        return workout
-    }
-    
-    //MARK: - CLLocationManagerDelegate
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            self.centerInMap(for: location.coordinate)
-            self.locationManager.stopUpdatingLocation()
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("error: \(error.localizedDescription)")
     }
     
     //MARK: - MKMapViewDelegate

@@ -98,8 +98,8 @@
 		342EFD132762CE5200376997 /* ActivitiesMap */ = {
 			isa = PBXGroup;
 			children = (
-				342EFD142762CE8C00376997 /* ActivitiesMapViewController.swift */,
 				3450F27027D3D879004E7266 /* ActivitiesMapViewModel.swift */,
+				342EFD142762CE8C00376997 /* ActivitiesMapViewController.swift */,
 			);
 			path = ActivitiesMap;
 			sourceTree = "<group>";

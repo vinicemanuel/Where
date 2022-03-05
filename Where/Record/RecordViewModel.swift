@@ -64,6 +64,7 @@ class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDeleg
     
     private func workoutToPolylineOveraly(workout: Workout) -> CustonPolyline {
         let overlay = CustonPolyline(coordinates: workout.route, count: workout.route.count)
+        overlay.color = Colors.oldRoutesColor
         return overlay
     }
     

@@ -153,11 +153,6 @@ class RecordViewController: UIViewController, MKMapViewDelegate {
     
     private func configOldersWorkouts() {
         let overlays = self.viewModelDelegate.getOldRouteOverlay()
-        
-        for overlay in overlays {
-            overlay.color = Colors.oldRoutesColor
-        }
-        
         self.shouldShowAllOtherRoutes = true
         self.mapView.addOverlays(overlays)
     }
