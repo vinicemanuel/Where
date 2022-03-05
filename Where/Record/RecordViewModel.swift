@@ -12,7 +12,7 @@ import Combine
 
 protocol RecordViewModelProtocol {
     func config(locationsClosure: @escaping ([CLLocation]) -> Void)
-    func updateLastLocation(lastLocationClosure: @escaping (CLLocation) -> Void)
+    func askForLastLocation(lastLocationClosure: @escaping (CLLocation) -> Void)
     
     func getCurrentRouteOverlay() -> CustonPolyline
     func getOldRouteOverlay() -> [CustonPolyline]
@@ -108,7 +108,7 @@ class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDeleg
         return overlays
     }
     
-    func updateLastLocation(lastLocationClosure: @escaping (CLLocation) -> Void) {
+    func askForLastLocation(lastLocationClosure: @escaping (CLLocation) -> Void) {
         self.lastLocationClosure = lastLocationClosure
         self.locationManager.requestLocation()
     }

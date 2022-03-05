@@ -66,7 +66,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate {
     private func configMap() {
         self.mapView.showsUserLocation = true
         self.mapView.delegate = self
-        self.viewModelDelegate.updateLastLocation { location in
+        self.viewModelDelegate.askForLastLocation { location in
             self.updateMapView(with: location)
         }
     }
@@ -196,7 +196,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate {
             self.centerInMap(for: location.coordinate)
         }
         
-        self.viewModelDelegate.updateLastLocation { location in
+        self.viewModelDelegate.askForLastLocation { location in
             self.updateMapView(with: location)
         }
     }
