@@ -111,6 +111,7 @@ class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDeleg
     
     func updateLastLocation(lastLocationClosure: @escaping (CLLocation) -> Void) {
         self.lastLocationClosure = lastLocationClosure
+        self.locationManager.requestLocation()
     }
     
     func saveCurrentWorkout() {
@@ -134,7 +135,6 @@ class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDeleg
         if let location = locations.last {
             self.lastLocation = location
             self.lastLocationClosure?(location)
-            self.locationManager.stopUpdatingLocation()
         }
     }
     
