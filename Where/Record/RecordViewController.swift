@@ -26,9 +26,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.viewModelDelegate = RecordViewModel()
-        
-        self.viewModelDelegate.config { locations in
+        self.viewModelDelegate = RecordViewModel(recordLocationsClosure: { locations in
             if let location = locations.last {
                 self.centerInMap(for: location.coordinate)
                 self.updateMapView()
@@ -36,7 +34,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate {
                     self.updateMapView()
                 }
             }
-        }
+        })
         
         self.stopButton.alpha = 0
     }
