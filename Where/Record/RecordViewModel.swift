@@ -12,6 +12,7 @@ import Combine
 
 protocol RecordViewModelProtocol {
     func askForLastLocation(lastLocationClosure: @escaping (CLLocation) -> Void)
+    func configSubscriptionForLocationsUpdate(locationsClosure: @escaping ([CLLocation]) -> Void)
     
     func getCurrentRouteOverlay() -> CustonPolyline
     func getOldRouteOverlay() -> [CustonPolyline]
@@ -42,14 +43,12 @@ class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDeleg
     
     init(workoutManager: WorkoutProtocol = WorkoutManager.shared,
          databaseManager: DatabaseProtocol = DatabaseManager.shared,
-         authorizationManager: AuthorizationProtocol = WorkoutManager.shared,
-         recordLocationsClosure: @escaping ([CLLocation]) -> Void)
+         authorizationManager: AuthorizationProtocol = WorkoutManager.shared)
     {
         self.workoutManager = workoutManager
         self.databaseManager = databaseManager
         self.authorizationManager = authorizationManager
         super.init()
-        self.configSubscription(locationsClosure: recordLocationsClosure)
         self.configLocationManager()
     }
     
@@ -78,7 +77,7 @@ class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDeleg
         return overlay
     }
     
-    func configSubscription(locationsClosure: @escaping ([CLLocation]) -> Void) {
+    func configSubscriptionForLocationsUpdate(locationsClosure: @escaping ([CLLocation]) -> Void) {
         self.workoutManager.subscribeForUpdates().sink { locations in
             locationsClosure(locations)
             if let location = locations.last {

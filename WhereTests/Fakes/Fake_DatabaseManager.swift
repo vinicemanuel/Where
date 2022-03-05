@@ -11,13 +11,15 @@ import CoreLocation
 
 class Fake_DatabaseManager: DatabaseProtocol {
     
+    var workouts: [Workout] = []
+    
     //MARK: - DatabaseProtocol
     func saveWorkout(workout: Workout) {
-        
+        workouts.append(workout)
     }
     
     func getAllActivities() -> [Activity] {
-        []
+        return []
     }
     
     func delete(activity: Activity) -> Bool {

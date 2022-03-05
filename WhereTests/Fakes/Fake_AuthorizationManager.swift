@@ -1,5 +1,5 @@
 //
-//  FAKE_AuthorizationManager.swift
+//  Fake_AuthorizationManager.swift
 //  WhereTests
 //
 //  Created by Vinicius Silva on 05/03/22.
@@ -8,7 +8,7 @@
 import Foundation
 @testable import Where
 
-class FAKE_AuthorizationManager: AuthorizationProtocol {
+class Fake_AuthorizationManager: AuthorizationProtocol {
     
     //MARK: - AuthorizationProtocol
     func requestLocationAuthorization() {

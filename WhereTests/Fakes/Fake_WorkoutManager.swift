@@ -17,17 +17,11 @@ class Fake_WorkoutManager: WorkoutProtocol {
     
     //MARK: WorkoutProtocol
     func startUpdate() {
-        self.timer = Timer(timeInterval: 1, repeats: true, block: { _ in
-            self.passthroughLocations.send([CLLocation(latitude: 0, longitude: 0)])
-        })
-        
-        RunLoop.main.add(self.timer!, forMode: .default)
+        self.passthroughLocations.send([CLLocation(latitude: 0, longitude: 0)])
     }
     
     func stopUpdate() {
-        if let timer = timer {
-            timer.invalidate()
-        }
+        
     }
     
     func subscribeForUpdates() -> AnyPublisher<[CLLocation], Never> {
