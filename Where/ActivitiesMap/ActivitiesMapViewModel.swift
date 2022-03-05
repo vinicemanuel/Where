@@ -16,9 +16,9 @@ protocol ActivitiesMapViewModelProtocol {
 class ActivitiesMapViewModel: NSObject, ActivitiesMapViewModelProtocol, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     private var lastLocationClosure: ((CLLocation) -> Void)?
-    private let databaseManager: DatabaseManager
+    private let databaseManager: DatabaseProtocol
     
-    init(databaseManager: DatabaseManager = DatabaseManager.shared) {
+    init(databaseManager: DatabaseProtocol = DatabaseManager.shared) {
         self.databaseManager = databaseManager
         super.init()
         self.configLocationManager()

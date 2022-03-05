@@ -13,9 +13,15 @@ protocol ActivitiesViewModelProtocol {
 }
 
 class ActivitiesViewModel: ActivitiesViewModelProtocol {
+    private let databaseManager: DatabaseProtocol
+    
+    init(databaseManager: DatabaseProtocol = DatabaseManager.shared) {
+        self.databaseManager = databaseManager
+    }
+    
     //MARK: - ActivitiesViewModelProtocol
     func deleteActicity(activity: Activity) -> Bool {
-        let deleted = DatabaseManager.shared.delete(activity: activity)
+        let deleted = self.databaseManager.delete(activity: activity)
         return deleted
     }
     

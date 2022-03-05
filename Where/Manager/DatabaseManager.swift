@@ -9,7 +9,13 @@ import Foundation
 import CoreData
 import CoreLocation
 
-class DatabaseManager {
+protocol DatabaseProtocol {
+    func saveWorkout(workout: Workout)
+    func getAllActivities() -> [Activity]
+    func delete(activity: Activity) -> Bool
+}
+
+class DatabaseManager: DatabaseProtocol {
     static let shared = DatabaseManager()
     
     private let persistentContainer: NSPersistentContainer
@@ -23,6 +29,7 @@ class DatabaseManager {
         }
     }
     
+    //MARK: - DatabaseProtocol
     func saveWorkout(workout: Workout) {
         let context = self.persistentContainer.viewContext
         let activity = Activity(context: context)

@@ -9,10 +9,18 @@ import Foundation
 import CoreLocation
 import Combine
 
-class WorkoutManager: NSObject, CLLocationManagerDelegate {
+protocol WorkoutProtocol {
+    func startUpdate()
+    func stopUpdate()
+    func subscribeForUpdates() -> AnyPublisher<[CLLocation], Never>
+    func requestLocationAuthorization()
+    func deviceLocationIsAuthorized() -> Bool
+}
+
+class WorkoutManager: NSObject, WorkoutProtocol, CLLocationManagerDelegate {
     static let shared = WorkoutManager()
     
-    let locationManager = CLLocationManager()
+    private let locationManager = CLLocationManager()
     private let passthroughLocations: PassthroughSubject<[CLLocation], Never>
     
     private override init() {
@@ -24,6 +32,7 @@ class WorkoutManager: NSObject, CLLocationManagerDelegate {
         self.locationManager.allowsBackgroundLocationUpdates = true
     }
     
+    //MARK: - WorkoutProtocol
     func requestLocationAuthorization() {
         self.locationManager.requestWhenInUseAuthorization()
     }
@@ -32,7 +41,15 @@ class WorkoutManager: NSObject, CLLocationManagerDelegate {
         return self.locationManager.authorizationStatus == .authorizedWhenInUse || self.locationManager.authorizationStatus == .authorizedAlways
     }
     
-    func subscribe() -> AnyPublisher<[CLLocation], Never> {
+    func startUpdate() {
+        WorkoutManager.shared.locationManager.startUpdatingLocation()
+    }
+    
+    func stopUpdate() {
+        WorkoutManager.shared.locationManager.stopUpdatingLocation()
+    }
+    
+    func subscribeForUpdates() -> AnyPublisher<[CLLocation], Never> {
         return self.passthroughLocations.eraseToAnyPublisher()
     }
     

@@ -34,10 +34,17 @@ class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDeleg
     private var workout = Workout()
     private var oldWorkouts: [Workout] = []
     private var lastLocationClosure: ((CLLocation) -> Void)?
+    private let workoutManager: WorkoutProtocol
+    private let databaseManager: DatabaseProtocol
     
     let locationManager = CLLocationManager()
     
-    init(recordLocationsClosure: @escaping ([CLLocation]) -> Void) {
+    init(workoutManager: WorkoutProtocol = WorkoutManager.shared,
+         databaseManager: DatabaseProtocol = DatabaseManager.shared,
+         recordLocationsClosure: @escaping ([CLLocation]) -> Void)
+    {
+        self.workoutManager = workoutManager
+        self.databaseManager = databaseManager
         super.init()
         self.configSubscription(locationsClosure: recordLocationsClosure)
         self.configLocationManager()
@@ -69,7 +76,7 @@ class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDeleg
     }
     
     func configSubscription(locationsClosure: @escaping ([CLLocation]) -> Void) {
-        WorkoutManager.shared.subscribe().sink { locations in
+        self.workoutManager.subscribeForUpdates().sink { locations in
             locationsClosure(locations)
             if let location = locations.last {
                 self.workout.updateWithNextLocation(nextLocation: location)
@@ -88,11 +95,11 @@ class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDeleg
     }
     
     func startRecordWorkout() {
-        WorkoutManager.shared.locationManager.startUpdatingLocation()
+        self.workoutManager.startUpdate()
     }
     
     func stopRecordWorkout() {
-        WorkoutManager.shared.locationManager.stopUpdatingLocation()
+        self.workoutManager.stopUpdate()
     }
     
     func getCurrentRouteOverlay() -> CustonPolyline {
@@ -100,7 +107,7 @@ class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDeleg
     }
     
     func getOldRouteOverlay() -> [CustonPolyline] {
-        let activities = DatabaseManager.shared.getAllActivities()
+        let activities = self.databaseManager.getAllActivities()
         let workouts = activities.map(self.convertActivityToWorkout(activity:))
         self.oldWorkouts = workouts
         
@@ -115,7 +122,7 @@ class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDeleg
     }
     
     func saveCurrentWorkout() {
-        DatabaseManager.shared.saveWorkout(workout: self.workout)
+        self.databaseManager.saveWorkout(workout: self.workout)
     }
     
     func discartCurrentWorkout() {
@@ -123,11 +130,11 @@ class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDeleg
     }
     
     func requestLocationAuthorization() {
-        WorkoutManager.shared.requestLocationAuthorization()
+        self.workoutManager.requestLocationAuthorization()
     }
     
     func isDeviceLocationIsAuthorized() -> Bool {
-        WorkoutManager.shared.deviceLocationIsAuthorized()
+        self.workoutManager.deviceLocationIsAuthorized()
     }
     
     //MARK: CLLocationManagerDelegate
