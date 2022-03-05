@@ -17,6 +17,10 @@
 		3450F26D27D2DD42004E7266 /* ActivitiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F26C27D2DD42004E7266 /* ActivitiesViewModel.swift */; };
 		3450F26F27D2E1BF004E7266 /* ActivityCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F26E27D2E1BF004E7266 /* ActivityCellViewModel.swift */; };
 		3450F27127D3D879004E7266 /* ActivitiesMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F27027D3D879004E7266 /* ActivitiesMapViewModel.swift */; };
+		3450F27327D3E952004E7266 /* RecordViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F27227D3E952004E7266 /* RecordViewModelTests.swift */; };
+		3450F27627D3E9B6004E7266 /* Fake_WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F27527D3E9B6004E7266 /* Fake_WorkoutManager.swift */; };
+		3450F27827D3ECE8004E7266 /* Fake_DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F27727D3ECE8004E7266 /* Fake_DatabaseManager.swift */; };
+		3450F27A27D3ED78004E7266 /* FAKE_AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F27927D3ED78004E7266 /* FAKE_AuthorizationManager.swift */; };
 		348350552747177200CDD898 /* Where.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 348350532747177200CDD898 /* Where.xcdatamodeld */; };
 		3483505727471A7E00CDD898 /* Workout .swift in Sources */ = {isa = PBXBuildFile; fileRef = 3483505627471A7E00CDD898 /* Workout .swift */; };
 		348AF4C82739DB7E003D0B00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348AF4C72739DB7E003D0B00 /* AppDelegate.swift */; };
@@ -51,6 +55,10 @@
 		3450F26C27D2DD42004E7266 /* ActivitiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewModel.swift; sourceTree = "<group>"; };
 		3450F26E27D2E1BF004E7266 /* ActivityCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCellViewModel.swift; sourceTree = "<group>"; };
 		3450F27027D3D879004E7266 /* ActivitiesMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesMapViewModel.swift; sourceTree = "<group>"; };
+		3450F27227D3E952004E7266 /* RecordViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModelTests.swift; sourceTree = "<group>"; };
+		3450F27527D3E9B6004E7266 /* Fake_WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fake_WorkoutManager.swift; sourceTree = "<group>"; };
+		3450F27727D3ECE8004E7266 /* Fake_DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fake_DatabaseManager.swift; sourceTree = "<group>"; };
+		3450F27927D3ED78004E7266 /* FAKE_AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAKE_AuthorizationManager.swift; sourceTree = "<group>"; };
 		348350542747177200CDD898 /* Where.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Where.xcdatamodel; sourceTree = "<group>"; };
 		3483505627471A7E00CDD898 /* Workout .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout .swift"; sourceTree = "<group>"; };
 		348AF4C42739DB7E003D0B00 /* Where.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Where.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +121,16 @@
 			path = ActivityCell;
 			sourceTree = "<group>";
 		};
+		3450F27427D3E99C004E7266 /* Fakes */ = {
+			isa = PBXGroup;
+			children = (
+				3450F27527D3E9B6004E7266 /* Fake_WorkoutManager.swift */,
+				3450F27727D3ECE8004E7266 /* Fake_DatabaseManager.swift */,
+				3450F27927D3ED78004E7266 /* FAKE_AuthorizationManager.swift */,
+			);
+			path = Fakes;
+			sourceTree = "<group>";
+		};
 		3483504F27447AE400CDD898 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,7 +190,9 @@
 		348AF4DD2739DB83003D0B00 /* WhereTests */ = {
 			isa = PBXGroup;
 			children = (
+				3450F27427D3E99C004E7266 /* Fakes */,
 				348AF4DE2739DB83003D0B00 /* WhereTests.swift */,
+				3450F27227D3E952004E7266 /* RecordViewModelTests.swift */,
 				348AF4E02739DB83003D0B00 /* Info.plist */,
 			);
 			path = WhereTests;
@@ -329,7 +349,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3450F27827D3ECE8004E7266 /* Fake_DatabaseManager.swift in Sources */,
 				348AF4DF2739DB83003D0B00 /* WhereTests.swift in Sources */,
+				3450F27627D3E9B6004E7266 /* Fake_WorkoutManager.swift in Sources */,
+				3450F27327D3E952004E7266 /* RecordViewModelTests.swift in Sources */,
+				3450F27A27D3ED78004E7266 /* FAKE_AuthorizationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,11 +13,14 @@ protocol WorkoutProtocol {
     func startUpdate()
     func stopUpdate()
     func subscribeForUpdates() -> AnyPublisher<[CLLocation], Never>
+}
+
+protocol AuthorizationProtocol {
     func requestLocationAuthorization()
     func deviceLocationIsAuthorized() -> Bool
 }
 
-class WorkoutManager: NSObject, WorkoutProtocol, CLLocationManagerDelegate {
+class WorkoutManager: NSObject, WorkoutProtocol, AuthorizationProtocol, CLLocationManagerDelegate {
     static let shared = WorkoutManager()
     
     private let locationManager = CLLocationManager()
@@ -32,7 +35,7 @@ class WorkoutManager: NSObject, WorkoutProtocol, CLLocationManagerDelegate {
         self.locationManager.allowsBackgroundLocationUpdates = true
     }
     
-    //MARK: - WorkoutProtocol
+    //MARK: - RequestAuthorizationProtocol
     func requestLocationAuthorization() {
         self.locationManager.requestWhenInUseAuthorization()
     }
@@ -41,6 +44,7 @@ class WorkoutManager: NSObject, WorkoutProtocol, CLLocationManagerDelegate {
         return self.locationManager.authorizationStatus == .authorizedWhenInUse || self.locationManager.authorizationStatus == .authorizedAlways
     }
     
+    //MARK: - WorkoutProtocol
     func startUpdate() {
         WorkoutManager.shared.locationManager.startUpdatingLocation()
     }

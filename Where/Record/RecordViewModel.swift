@@ -36,15 +36,18 @@ class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDeleg
     private var lastLocationClosure: ((CLLocation) -> Void)?
     private let workoutManager: WorkoutProtocol
     private let databaseManager: DatabaseProtocol
+    private let authorizationManager: AuthorizationProtocol
     
     let locationManager = CLLocationManager()
     
     init(workoutManager: WorkoutProtocol = WorkoutManager.shared,
          databaseManager: DatabaseProtocol = DatabaseManager.shared,
+         authorizationManager: AuthorizationProtocol = WorkoutManager.shared,
          recordLocationsClosure: @escaping ([CLLocation]) -> Void)
     {
         self.workoutManager = workoutManager
         self.databaseManager = databaseManager
+        self.authorizationManager = authorizationManager
         super.init()
         self.configSubscription(locationsClosure: recordLocationsClosure)
         self.configLocationManager()
@@ -130,11 +133,11 @@ class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDeleg
     }
     
     func requestLocationAuthorization() {
-        self.workoutManager.requestLocationAuthorization()
+        self.authorizationManager.requestLocationAuthorization()
     }
     
     func isDeviceLocationIsAuthorized() -> Bool {
-        self.workoutManager.deviceLocationIsAuthorized()
+        self.authorizationManager.deviceLocationIsAuthorized()
     }
     
     //MARK: CLLocationManagerDelegate
