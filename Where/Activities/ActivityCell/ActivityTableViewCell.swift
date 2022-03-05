@@ -21,7 +21,7 @@ class ActivityTableViewCell: UITableViewCell, MKMapViewDelegate {
     static let cellID = "activityCell"
     
     func configWith(activity: Activity) {
-        self.viewModelDelegate.configWith(activity: activity)
+        self.viewModelDelegate = ActivityCellViewModel(activity: activity)
         
         let center = self.viewModelDelegate.center
         let straightDistance = self.viewModelDelegate.straightDistance
@@ -40,7 +40,6 @@ class ActivityTableViewCell: UITableViewCell, MKMapViewDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.viewModelDelegate = ActivityCellViewModel()
         self.mapView.delegate = self
     }
     

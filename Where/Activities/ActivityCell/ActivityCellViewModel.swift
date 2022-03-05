@@ -9,7 +9,6 @@ import Foundation
 import CoreLocation
 
 protocol ActivityCellViewModelProtocol {
-    func configWith(activity: Activity)
     var dateString: String { get }
     var distanceString: String { get }
     var straightDistance: CLLocationDistance { get }
@@ -24,6 +23,19 @@ class ActivityCellViewModel: ActivityCellViewModelProtocol {
     private var meanLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     private var activityOverlay: CustonPolyline = CustonPolyline(coordinates: [], count: 0)
     
+    init(activity: Activity) {
+        self.activityDate = ""
+        if let date = activity.date {
+            let dateString = self.stringFromDate(date: date)
+            activityDate = dateString
+        }
+        
+        if let locations: NSOrderedSet = activity.locations,
+           let locationsArray = locations.array as? [Location] {
+            self.extractRouteInfo(locationsArray)
+        }
+    }
+    
     private func stringFromDate(date: Date) -> String {
         let dateFormater = DateFormatter()
         dateFormater.dateFormat = "dd/MM/yyyy HH:mm"
@@ -31,7 +43,7 @@ class ActivityCellViewModel: ActivityCellViewModelProtocol {
         return string
     }
     
-    private func configMap(_ locationsArray: [Location]) {
+    private func extractRouteInfo(_ locationsArray: [Location]) {
         var clLocation: [CLLocation] = []
         var clLocationCoordinate2Ds: [CLLocationCoordinate2D] = []
         
@@ -106,19 +118,6 @@ class ActivityCellViewModel: ActivityCellViewModelProtocol {
     var overlay: CustonPolyline {
         get {
             return self.activityOverlay
-        }
-    }
-    
-    func configWith(activity: Activity) {
-        self.activityDate = ""
-        if let date = activity.date {
-            let dateString = self.stringFromDate(date: date)
-            activityDate = dateString
-        }
-        
-        if let locations: NSOrderedSet = activity.locations,
-           let locationsArray = locations.array as? [Location] {
-            self.configMap(locationsArray)
         }
     }
 }

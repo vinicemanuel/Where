@@ -12,9 +12,11 @@ class ActivitiesMapViewController: UIViewController, CLLocationManagerDelegate, 
     @IBOutlet weak var mapView: MKMapView!
     
     let locationManager = CLLocationManager()
+    var modelView: ActivitiesMapViewModelProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.modelView = ActivitiesMapViewModel()
         self.configMap()
         self.configLocationManager()
     }
