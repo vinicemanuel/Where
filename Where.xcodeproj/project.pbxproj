@@ -13,6 +13,15 @@
 		342EFD1227612C4700376997 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD1127612C4700376997 /* WorkoutManager.swift */; };
 		342EFD152762CE8C00376997 /* ActivitiesMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD142762CE8C00376997 /* ActivitiesMapViewController.swift */; };
 		34300595273B39C9004C0D27 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300594273B39C9004C0D27 /* ActivityTableViewCell.swift */; };
+		3450F26B27D2CCD6004E7266 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F26A27D2CCD6004E7266 /* RecordViewModel.swift */; };
+		3450F26D27D2DD42004E7266 /* ActivitiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F26C27D2DD42004E7266 /* ActivitiesViewModel.swift */; };
+		3450F26F27D2E1BF004E7266 /* ActivityCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F26E27D2E1BF004E7266 /* ActivityCellViewModel.swift */; };
+		3450F27127D3D879004E7266 /* ActivitiesMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F27027D3D879004E7266 /* ActivitiesMapViewModel.swift */; };
+		3450F27327D3E952004E7266 /* RecordViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F27227D3E952004E7266 /* RecordViewModelTests.swift */; };
+		3450F27627D3E9B6004E7266 /* Fake_WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F27527D3E9B6004E7266 /* Fake_WorkoutManager.swift */; };
+		3450F27827D3ECE8004E7266 /* Fake_DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F27727D3ECE8004E7266 /* Fake_DatabaseManager.swift */; };
+		3450F27A27D3ED78004E7266 /* Fake_AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F27927D3ED78004E7266 /* Fake_AuthorizationManager.swift */; };
+		3450F27C27D3FEAE004E7266 /* ActivityCellViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F27B27D3FEAE004E7266 /* ActivityCellViewModelTest.swift */; };
 		348350552747177200CDD898 /* Where.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 348350532747177200CDD898 /* Where.xcdatamodeld */; };
 		3483505727471A7E00CDD898 /* Workout .swift in Sources */ = {isa = PBXBuildFile; fileRef = 3483505627471A7E00CDD898 /* Workout .swift */; };
 		348AF4C82739DB7E003D0B00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348AF4C72739DB7E003D0B00 /* AppDelegate.swift */; };
@@ -43,6 +52,15 @@
 		342EFD1127612C4700376997 /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
 		342EFD142762CE8C00376997 /* ActivitiesMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesMapViewController.swift; sourceTree = "<group>"; };
 		34300594273B39C9004C0D27 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
+		3450F26A27D2CCD6004E7266 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
+		3450F26C27D2DD42004E7266 /* ActivitiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewModel.swift; sourceTree = "<group>"; };
+		3450F26E27D2E1BF004E7266 /* ActivityCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCellViewModel.swift; sourceTree = "<group>"; };
+		3450F27027D3D879004E7266 /* ActivitiesMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesMapViewModel.swift; sourceTree = "<group>"; };
+		3450F27227D3E952004E7266 /* RecordViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModelTests.swift; sourceTree = "<group>"; };
+		3450F27527D3E9B6004E7266 /* Fake_WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fake_WorkoutManager.swift; sourceTree = "<group>"; };
+		3450F27727D3ECE8004E7266 /* Fake_DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fake_DatabaseManager.swift; sourceTree = "<group>"; };
+		3450F27927D3ED78004E7266 /* Fake_AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fake_AuthorizationManager.swift; sourceTree = "<group>"; };
+		3450F27B27D3FEAE004E7266 /* ActivityCellViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCellViewModelTest.swift; sourceTree = "<group>"; };
 		348350542747177200CDD898 /* Where.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Where.xcdatamodel; sourceTree = "<group>"; };
 		3483505627471A7E00CDD898 /* Workout .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout .swift"; sourceTree = "<group>"; };
 		348AF4C42739DB7E003D0B00 /* Where.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Where.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +108,7 @@
 		342EFD132762CE5200376997 /* ActivitiesMap */ = {
 			isa = PBXGroup;
 			children = (
+				3450F27027D3D879004E7266 /* ActivitiesMapViewModel.swift */,
 				342EFD142762CE8C00376997 /* ActivitiesMapViewController.swift */,
 			);
 			path = ActivitiesMap;
@@ -98,9 +117,20 @@
 		34300593273B37EE004C0D27 /* ActivityCell */ = {
 			isa = PBXGroup;
 			children = (
+				3450F26E27D2E1BF004E7266 /* ActivityCellViewModel.swift */,
 				34300594273B39C9004C0D27 /* ActivityTableViewCell.swift */,
 			);
 			path = ActivityCell;
+			sourceTree = "<group>";
+		};
+		3450F27427D3E99C004E7266 /* Fakes */ = {
+			isa = PBXGroup;
+			children = (
+				3450F27527D3E9B6004E7266 /* Fake_WorkoutManager.swift */,
+				3450F27727D3ECE8004E7266 /* Fake_DatabaseManager.swift */,
+				3450F27927D3ED78004E7266 /* Fake_AuthorizationManager.swift */,
+			);
+			path = Fakes;
 			sourceTree = "<group>";
 		};
 		3483504F27447AE400CDD898 /* Model */ = {
@@ -162,7 +192,10 @@
 		348AF4DD2739DB83003D0B00 /* WhereTests */ = {
 			isa = PBXGroup;
 			children = (
+				3450F27427D3E99C004E7266 /* Fakes */,
 				348AF4DE2739DB83003D0B00 /* WhereTests.swift */,
+				3450F27227D3E952004E7266 /* RecordViewModelTests.swift */,
+				3450F27B27D3FEAE004E7266 /* ActivityCellViewModelTest.swift */,
 				348AF4E02739DB83003D0B00 /* Info.plist */,
 			);
 			path = WhereTests;
@@ -171,6 +204,7 @@
 		348AF4F92739E818003D0B00 /* Record */ = {
 			isa = PBXGroup;
 			children = (
+				3450F26A27D2CCD6004E7266 /* RecordViewModel.swift */,
 				348AF4FA2739E839003D0B00 /* RecordViewController.swift */,
 			);
 			path = Record;
@@ -188,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				34300593273B37EE004C0D27 /* ActivityCell */,
+				3450F26C27D2DD42004E7266 /* ActivitiesViewModel.swift */,
 				348AF502273B2A8B003D0B00 /* ActivitiesViewController.swift */,
 			);
 			path = Activities;
@@ -300,8 +335,12 @@
 				348AF5002739EE61003D0B00 /* Colors.swift in Sources */,
 				342EFD1227612C4700376997 /* WorkoutManager.swift in Sources */,
 				342EFD0C274DB02300376997 /* CustonPolyline.swift in Sources */,
+				3450F27127D3D879004E7266 /* ActivitiesMapViewModel.swift in Sources */,
 				34300595273B39C9004C0D27 /* ActivityTableViewCell.swift in Sources */,
 				348350552747177200CDD898 /* Where.xcdatamodeld in Sources */,
+				3450F26B27D2CCD6004E7266 /* RecordViewModel.swift in Sources */,
+				3450F26D27D2DD42004E7266 /* ActivitiesViewModel.swift in Sources */,
+				3450F26F27D2E1BF004E7266 /* ActivityCellViewModel.swift in Sources */,
 				3483505727471A7E00CDD898 /* Workout .swift in Sources */,
 				348AF503273B2A8C003D0B00 /* ActivitiesViewController.swift in Sources */,
 				348AF4C82739DB7E003D0B00 /* AppDelegate.swift in Sources */,
@@ -313,7 +352,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3450F27827D3ECE8004E7266 /* Fake_DatabaseManager.swift in Sources */,
+				3450F27C27D3FEAE004E7266 /* ActivityCellViewModelTest.swift in Sources */,
 				348AF4DF2739DB83003D0B00 /* WhereTests.swift in Sources */,
+				3450F27627D3E9B6004E7266 /* Fake_WorkoutManager.swift in Sources */,
+				3450F27327D3E952004E7266 /* RecordViewModelTests.swift in Sources */,
+				3450F27A27D3ED78004E7266 /* Fake_AuthorizationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

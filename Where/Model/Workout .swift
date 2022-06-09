@@ -16,6 +16,7 @@ class Workout {
     func updateWithNextLocation(nextLocation location: CLLocation) {
         guard let lastLocation = self.lastLocation else {
             self.lastLocation = location
+            self.route.append(location.coordinate)
             return
         }
         

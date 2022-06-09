@@ -14,83 +14,28 @@ class ActivityTableViewCell: UITableViewCell, MKMapViewDelegate {
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var distanceLabel: UILabel!
     
+    private var viewModelDelegate: ActivityCellViewModelProtocol!
+    
     private var activity: Activity!
     
     static let cellID = "activityCell"
     
-    private func configMap(_ locationsArray: [Location]) {
-        var clLocation: [CLLocation] = []
-        var clLocationCoordinate2Ds: [CLLocationCoordinate2D] = []
+    func configWith(activity: Activity) {
+        self.viewModelDelegate = ActivityCellViewModel(activity: activity)
         
-        var maxLat: Double = (-1)*(Double.infinity)
-        var minLat: Double = (Double.infinity)
-        var maxLon: Double = (-1)*(Double.infinity)
-        var minLon: Double = (Double.infinity)
+        let center = self.viewModelDelegate.center
+        let straightDistance = self.viewModelDelegate.straightDistance
         
-        locationsArray.forEach { location in
-            clLocation.append(CLLocation(latitude: location.latitude, longitude: location.longitude))
-            clLocationCoordinate2Ds.append(CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
-            
-            if maxLat < location.latitude {
-                maxLat = location.latitude
-            }
-            
-            if minLat > location.latitude {
-                minLat = location.latitude
-            }
-            
-            if maxLon < location.longitude {
-                maxLon = location.longitude
-            }
-            
-            if minLon > location.longitude {
-                minLon = location.longitude
-            }
-        }
-        
-        let meanlat = ((maxLat - minLat) / 2) + minLat
-        let meanLon = ((maxLon - minLon) / 2) + minLon
-        
-        let distanceMinMax = CLLocation(latitude: maxLat, longitude: maxLon).distance(from: CLLocation(latitude: minLat, longitude: minLon))
-        
-        let meanLocation = CLLocationCoordinate2D(latitude: meanlat, longitude: meanLon)
-        let region = MKCoordinateRegion(center: meanLocation, latitudinalMeters: distanceMinMax * 1.2, longitudinalMeters: distanceMinMax * 1.2)
+        let region = MKCoordinateRegion(center: center, latitudinalMeters: straightDistance * 1.2, longitudinalMeters: straightDistance * 1.2)
         self.mapView.setRegion(region, animated: false)
         
-        var distance: Double = 0
-        for (first, second) in zip(clLocation, clLocation.dropFirst()) {
-            distance = distance + second.distance(from: first)
-        }
-        
-        self.distanceLabel.text = "\(String(format: "%.2f", (distance/1000))) Km"
-        
-        let overlay = CustonPolyline(coordinates: clLocationCoordinate2Ds, count: clLocationCoordinate2Ds.count)
-        overlay.color = UIColor.yellow.withAlphaComponent(0.9)
-        
         self.mapView.removeOverlays(self.mapView.overlays)
+        let overlay = self.viewModelDelegate.overlay
+        overlay.color = Colors.oldRoutesColor
         self.mapView.addOverlay(overlay)
-    }
-    
-    func configWith(activity: Activity) {
-        if let date = activity.date {
-            let dateString = self.stringFromDate(date: date)
-            self.dateLabel.text = dateString
-        } else {
-            self.dateLabel.text = ""
-        }
         
-        if let locations: NSOrderedSet = activity.locations,
-           let locationsArray = locations.array as? [Location] {
-            
-            self.configMap(locationsArray)
-        }
-    }
-    
-    private func stringFromDate(date: Date) -> String {
-        let dateFormater = DateFormatter()
-        dateFormater.dateFormat = "dd/MM/yyyy HH:mm"
-        let string = dateFormater.string(from: date)
-        return string
+        self.dateLabel.text = self.viewModelDelegate.dateString
+        self.distanceLabel.text = self.viewModelDelegate.distanceString
     }
     
     override func awakeFromNib() {

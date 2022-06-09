@@ -9,7 +9,13 @@ import Foundation
 import CoreData
 import CoreLocation
 
-class DatabaseManager {
+protocol DatabaseProtocol {
+    func saveWorkout(workout: Workout, date: Date)
+    func getAllActivities() -> [Activity]
+    func delete(activity: Activity) -> Bool
+}
+
+class DatabaseManager: DatabaseProtocol {
     static let shared = DatabaseManager()
     
     private let persistentContainer: NSPersistentContainer
@@ -23,7 +29,8 @@ class DatabaseManager {
         }
     }
     
-    func saveWorkout(workout: Workout) {
+    //MARK: - DatabaseProtocol
+    func saveWorkout(workout: Workout, date: Date) {
         let context = self.persistentContainer.viewContext
         let activity = Activity(context: context)
         
@@ -36,7 +43,7 @@ class DatabaseManager {
         })
         
         activity.locations = NSOrderedSet(array: locations)
-        activity.date = Date()
+        activity.date = date
         activity.distance = workout.discante
         
         do {
