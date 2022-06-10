@@ -20,6 +20,11 @@ class ActivityTableViewCell: UITableViewCell, MKMapViewDelegate {
     
     static let cellID = "activityCell"
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.mapView.delegate = self
+    }
+    
     func configWith(activity: Activity) {
         self.viewModelDelegate = ActivityCellViewModel(activity: activity)
         
@@ -36,11 +41,6 @@ class ActivityTableViewCell: UITableViewCell, MKMapViewDelegate {
         
         self.dateLabel.text = self.viewModelDelegate.dateString
         self.distanceLabel.text = self.viewModelDelegate.distanceString
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.mapView.delegate = self
     }
     
     //MARK: - MKMapViewDelegate
