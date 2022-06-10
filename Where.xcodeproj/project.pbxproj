@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09FDF88F2853C64900C32326 /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FDF88E2853C64900C32326 /* ActivityDetailViewController.swift */; };
 		342EFD0A274DA82A00376997 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD09274DA82A00376997 /* DatabaseManager.swift */; };
 		342EFD0C274DB02300376997 /* CustonPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD0B274DB02300376997 /* CustonPolyline.swift */; };
 		342EFD0F274DB80400376997 /* mapstogpx20211123_234720.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 342EFD0E274DB80400376997 /* mapstogpx20211123_234720.gpx */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09FDF88E2853C64900C32326 /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
 		342EFD09274DA82A00376997 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		342EFD0B274DB02300376997 /* CustonPolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustonPolyline.swift; sourceTree = "<group>"; };
 		342EFD0E274DB80400376997 /* mapstogpx20211123_234720.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mapstogpx20211123_234720.gpx; sourceTree = "<group>"; };
@@ -104,6 +106,23 @@
 				348AF4F92739E818003D0B00 /* Record */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		09FDF88C2853C62500C32326 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				3450F26C27D2DD42004E7266 /* ActivitiesViewModel.swift */,
+				348AF502273B2A8B003D0B00 /* ActivitiesViewController.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		09FDF88D2853C62F00C32326 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				09FDF88E2853C64900C32326 /* ActivityDetailViewController.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		342EFD1027612BF800376997 /* Manager */ = {
@@ -229,9 +248,9 @@
 		348AF501273B2A59003D0B00 /* Activities */ = {
 			isa = PBXGroup;
 			children = (
+				09FDF88D2853C62F00C32326 /* Detail */,
+				09FDF88C2853C62500C32326 /* List */,
 				34300593273B37EE004C0D27 /* ActivityCell */,
-				3450F26C27D2DD42004E7266 /* ActivitiesViewModel.swift */,
-				348AF502273B2A8B003D0B00 /* ActivitiesViewController.swift */,
 			);
 			path = Activities;
 			sourceTree = "<group>";
@@ -338,6 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				348AF4FB2739E839003D0B00 /* RecordViewController.swift in Sources */,
+				09FDF88F2853C64900C32326 /* ActivityDetailViewController.swift in Sources */,
 				342EFD0A274DA82A00376997 /* DatabaseManager.swift in Sources */,
 				342EFD152762CE8C00376997 /* ActivitiesMapViewController.swift in Sources */,
 				348AF5002739EE61003D0B00 /* Colors.swift in Sources */,

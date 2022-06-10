@@ -22,6 +22,10 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         self.tableView.reloadData()
     }
     
+    func presentDetail(For activity: Activity) {
+        	
+    }
+    
     //MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ActivityTableViewCell.cellID) as! ActivityTableViewCell
@@ -34,7 +38,8 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("didSelectRowAt", indexPath)
+        let activity = self.viewModelDelegate.activities[indexPath.section]
+        self.presentDetail(For: activity)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
