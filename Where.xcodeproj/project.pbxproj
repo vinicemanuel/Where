@@ -96,6 +96,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09FDF8692853A61F00C32326 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				342EFD132762CE5200376997 /* ActivitiesMap */,
+				348AF501273B2A59003D0B00 /* Activities */,
+				348AF4F92739E818003D0B00 /* Record */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		342EFD1027612BF800376997 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,9 +182,7 @@
 		348AF4C62739DB7E003D0B00 /* Where */ = {
 			isa = PBXGroup;
 			children = (
-				342EFD132762CE5200376997 /* ActivitiesMap */,
-				348AF501273B2A59003D0B00 /* Activities */,
-				348AF4F92739E818003D0B00 /* Record */,
+				09FDF8692853A61F00C32326 /* App */,
 				348AF4FE2739EE54003D0B00 /* General */,
 				348350522747175600CDD898 /* Resources */,
 				3483504F27447AE400CDD898 /* Model */,
