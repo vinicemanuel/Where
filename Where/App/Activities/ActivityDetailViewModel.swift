@@ -30,7 +30,7 @@ class ActivityDetailViewModel: ActivityDetailViewModelDelegate {
     
     private func stringFromDate(date: Date) -> String {
         let dateFormater = DateFormatter()
-        dateFormater.dateFormat = "dd/MM/yyyy HH:mm"
+        dateFormater.dateFormat = "dd/MM/yyyy"
         let string = dateFormater.string(from: date)
         return string
     }

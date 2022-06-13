@@ -11,6 +11,8 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var tableView: UITableView!
     var viewModelDelegate: ActivitiesViewModelDelegate!
     
+    private let segueID = "ShowDetailSegue"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewModelDelegate = ActivitiesViewModel()
@@ -23,7 +25,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     private func presentDetail(For activity: Activity) {
-        self.performSegue(withIdentifier: "ShowDetailSegue", sender: activity)
+        self.performSegue(withIdentifier: self.segueID, sender: activity)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

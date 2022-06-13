@@ -25,10 +25,29 @@ class ActivityDetailViewController: UIViewController, MKMapViewDelegate {
 
         self.mapActivities.delegate = self
         self.viewModelDelegate = ActivityDetailViewModel(activity: activity)
+        self.configView()
+        self.configMap()
+    }
+    
+    private func configView() {
+        self.dateLabel.text = self.viewModelDelegate.dateString
+        self.distanceLabel.text = self.viewModelDelegate.distanceString
+    }
+    
+    private func configMap() {
+        let center = self.viewModelDelegate.center
+        let straightDistance = self.viewModelDelegate.straightDistance
+        
+        let region = MKCoordinateRegion(center: center, latitudinalMeters: straightDistance * 1.2, longitudinalMeters: straightDistance * 1.2)
+        self.mapActivities.setRegion(region, animated: false)
+        
+        let overlay = self.viewModelDelegate.overlay
+        overlay.color = Colors.currentRouteColor
+        self.mapActivities.addOverlay(overlay)
     }
     
     @IBAction func deleteActivityTaped(_ sender: Any) {
-        
+        self.dismiss(animated: true)
     }
     
     //MARK: - MKMapViewDelegate

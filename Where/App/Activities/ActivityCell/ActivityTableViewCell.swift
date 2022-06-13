@@ -36,7 +36,7 @@ class ActivityTableViewCell: UITableViewCell, MKMapViewDelegate {
         
         self.mapView.removeOverlays(self.mapView.overlays)
         let overlay = self.viewModelDelegate.overlay
-        overlay.color = Colors.oldRoutesColor
+        overlay.color = Colors.currentRouteColor
         self.mapView.addOverlay(overlay)
         
         self.dateLabel.text = self.viewModelDelegate.dateString
