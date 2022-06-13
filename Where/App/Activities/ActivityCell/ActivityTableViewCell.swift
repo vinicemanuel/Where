@@ -14,7 +14,7 @@ class ActivityTableViewCell: UITableViewCell, MKMapViewDelegate {
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var distanceLabel: UILabel!
     
-    private var viewModelDelegate: ActivityCellViewModelProtocol!
+    private var viewModelDelegate: ActivityCellViewModelDelegate!
     
     private var activity: Activity!
     

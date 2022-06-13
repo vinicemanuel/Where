@@ -8,7 +8,7 @@
 import Foundation
 @testable import Where
 
-class Fake_AuthorizationManager: AuthorizationProtocol {
+class Fake_AuthorizationManager: AuthorizationDelegate {
     
     //MARK: - AuthorizationProtocol
     func requestLocationAuthorization() {

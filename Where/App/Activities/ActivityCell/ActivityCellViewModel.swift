@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-protocol ActivityCellViewModelProtocol {
+protocol ActivityCellViewModelDelegate {
     var dateString: String { get }
     var distanceString: String { get }
     var straightDistance: CLLocationDistance { get }
@@ -16,7 +16,7 @@ protocol ActivityCellViewModelProtocol {
     var overlay: CustonPolyline { get }
 }
 
-class ActivityCellViewModel: ActivityCellViewModelProtocol {
+class ActivityCellViewModel: ActivityCellViewModelDelegate {
     private var activityDate: String = ""
     private var distance: String = ""
     private var distanceMinMax: CLLocationDistance = 0

@@ -8,17 +8,17 @@
 import Foundation
 import CoreLocation
 
-protocol ActivitiesMapViewModelProtocol {
+protocol ActivitiesMapViewModelDelegate {
     func askForLastLocation(lastLocationClosure: @escaping (CLLocation) -> Void)
     func getOldRouteOverlay() -> [CustonPolyline]
 }
 
-class ActivitiesMapViewModel: NSObject, ActivitiesMapViewModelProtocol, CLLocationManagerDelegate {
+class ActivitiesMapViewModel: NSObject, ActivitiesMapViewModelDelegate, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     private var lastLocationClosure: ((CLLocation) -> Void)?
-    private let databaseManager: DatabaseProtocol
+    private let databaseManager: DatabaseDelegate
     
-    init(databaseManager: DatabaseProtocol = DatabaseManager.shared) {
+    init(databaseManager: DatabaseDelegate = DatabaseManager.shared) {
         self.databaseManager = databaseManager
         super.init()
         self.configLocationManager()
@@ -49,7 +49,7 @@ class ActivitiesMapViewModel: NSObject, ActivitiesMapViewModelProtocol, CLLocati
         return overlay
     }
     
-    //MARK: - ActivitiesMapViewModelProtocol
+    //MARK: - ActivitiesMapViewDelegate
     func askForLastLocation(lastLocationClosure: @escaping (CLLocation) -> Void) {
         self.lastLocationClosure = lastLocationClosure
         self.locationManager.requestLocation()

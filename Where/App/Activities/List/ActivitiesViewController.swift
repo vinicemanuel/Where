@@ -9,7 +9,7 @@ import UIKit
 
 class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
-    var viewModelDelegate: ActivitiesViewModelProtocol!
+    var viewModelDelegate: ActivitiesViewModelDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()

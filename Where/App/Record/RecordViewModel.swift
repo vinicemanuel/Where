@@ -10,7 +10,7 @@ import CoreLocation
 import Combine
 
 
-protocol RecordViewModelProtocol {
+protocol RecordViewModelDelegate {
     func askForLastLocation(lastLocationClosure: @escaping (CLLocation) -> Void)
     func configSubscriptionForLocationsUpdate(locationsClosure: @escaping ([CLLocation]) -> Void)
     
@@ -29,21 +29,21 @@ protocol RecordViewModelProtocol {
     var lastRegisteredLocation: CLLocation? { get }
 }
 
-class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDelegate {
+class RecordViewModel: NSObject, RecordViewModelDelegate, CLLocationManagerDelegate {
     private var subscriptions = Set<AnyCancellable>()
     private var lastLocation: CLLocation?
     private var workout = Workout()
     private var oldWorkouts: [Workout] = []
     private var lastLocationClosure: ((CLLocation) -> Void)?
-    private let workoutManager: WorkoutProtocol
-    private let databaseManager: DatabaseProtocol
-    private let authorizationManager: AuthorizationProtocol
+    private let workoutManager: WorkoutDelegate
+    private let databaseManager: DatabaseDelegate
+    private let authorizationManager: AuthorizationDelegate
     
     let locationManager = CLLocationManager()
     
-    init(workoutManager: WorkoutProtocol = WorkoutManager.shared,
-         databaseManager: DatabaseProtocol = DatabaseManager.shared,
-         authorizationManager: AuthorizationProtocol = WorkoutManager.shared)
+    init(workoutManager: WorkoutDelegate = WorkoutManager.shared,
+         databaseManager: DatabaseDelegate = DatabaseManager.shared,
+         authorizationManager: AuthorizationDelegate = WorkoutManager.shared)
     {
         self.workoutManager = workoutManager
         self.databaseManager = databaseManager
