@@ -260,8 +260,8 @@
 			children = (
 				09DDD34C28576A560097D764 /* ActivityViewModelDelegate.swift */,
 				3450F26E27D2E1BF004E7266 /* ActivityViewModel.swift */,
-				09FDF88D2853C62F00C32326 /* Detail */,
 				34300593273B37EE004C0D27 /* ActivityCell */,
+				09FDF88D2853C62F00C32326 /* Detail */,
 				09FDF88C2853C62500C32326 /* List */,
 			);
 			path = Activities;

@@ -7,7 +7,8 @@
 
 import UIKit
 
-class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ActivityDetailDelegate {
+    
     @IBOutlet weak var tableView: UITableView!
     var viewModelDelegate: ActivitiesViewModelDelegate!
     
@@ -33,6 +34,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         let activity = sender as? Activity else { return }
         
         viewController.activity = activity
+        viewController.delegate = self
     }
     
     //MARK: - UITableViewDelegate
@@ -40,7 +42,6 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: ActivityTableViewCell.cellID) as! ActivityTableViewCell
         
         let activity = self.viewModelDelegate.activities[indexPath.section]
-        
         cell.configWith(activity: activity)
         
         return cell
@@ -59,6 +60,11 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 20
+    }
+    
+    //MARK: - ActivityDetailDelegate
+    func deletedActivity() {
+        self.tableView.reloadData()
     }
     
     //MARK: - UITableViewDataSource

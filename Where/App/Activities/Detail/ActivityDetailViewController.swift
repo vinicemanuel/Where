@@ -8,6 +8,10 @@
 import UIKit
 import MapKit
 
+protocol ActivityDetailDelegate: AnyObject {
+    func deletedActivity()
+}
+
 class ActivityDetailViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var deleteActivity: UIButton!
@@ -17,6 +21,7 @@ class ActivityDetailViewController: UIViewController, MKMapViewDelegate {
     
     private var modelView: ActivityDetailViewModel!
     var activity: Activity!
+    weak var delegate: ActivityDetailDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +62,17 @@ class ActivityDetailViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func deleteActivityTaped(_ sender: Any) {
-        self.dismiss(animated: true)
+        let deleted = self.modelView.deleteActicity(activity: activity)
+        if deleted {
+            self.dismiss(animated: true)
+            self.delegate?.deletedActivity()
+        } else {
+            let alert = UIAlertController(title: "Error", message: "Error trying to delete route.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alert.addAction(okAction)
+            
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     //MARK: - MKMapViewDelegate

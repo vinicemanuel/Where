@@ -7,7 +7,11 @@
 
 import Foundation
 
-class ActivityDetailViewModel: ActivityViewModel, MapViewOlderRouteDelegate {
+protocol ActivityDetailViewDelegate: MapViewOlderRouteDelegate {
+    func deleteActicity(activity: Activity) -> Bool
+}
+
+class ActivityDetailViewModel: ActivityViewModel, ActivityDetailViewDelegate {
     
     private let databaseManager: DatabaseDelegate
     
@@ -24,5 +28,11 @@ class ActivityDetailViewModel: ActivityViewModel, MapViewOlderRouteDelegate {
         let overlays = workouts.map( { $0.convertToPolylineOveraly() } )
         
         return overlays
+    }
+    
+    //MARK: - ActivityDetailViewDelegate
+    func deleteActicity(activity: Activity) -> Bool {
+        let deleted = self.databaseManager.delete(activity: activity)
+        return deleted
     }
 }
