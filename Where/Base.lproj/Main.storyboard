@@ -261,10 +261,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rt3-Bb-l6N">
-                                <rect key="frame" x="0.0" y="94.5" width="414" height="747.5"/>
+                                <rect key="frame" x="0.0" y="104.5" width="414" height="737.5"/>
                             </mapView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="160" translatesAutoresizingMaskIntoConstraints="NO" id="JtV-AG-0J9">
-                                <rect key="frame" x="20" y="54" width="374" height="20.5"/>
+                                <rect key="frame" x="20" y="64" width="374" height="20.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="28/01/1994" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfU-XZ-lU7">
                                         <rect key="frame" x="0.0" y="0.0" width="91.5" height="20.5"/>
@@ -281,9 +281,9 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uTk-0f-XIn">
-                                <rect key="frame" x="330.5" y="124.5" width="63.5" height="28.5"/>
-                                <color key="backgroundColor" name="Icons"/>
-                                <color key="tintColor" name="Texts"/>
+                                <rect key="frame" x="338.5" y="783.5" width="63.5" height="28.5"/>
+                                <color key="backgroundColor" name="Backgroud2"/>
+                                <color key="tintColor" name="Backgroud"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Delete">
                                     <fontDescription key="titleFontDescription" type="boldSystem" pointSize="0.0"/>
@@ -297,11 +297,11 @@
                         <color key="backgroundColor" name="Backgroud"/>
                         <constraints>
                             <constraint firstItem="rt3-Bb-l6N" firstAttribute="leading" secondItem="Yfa-2V-NCa" secondAttribute="leading" id="9q6-RT-Tzd"/>
-                            <constraint firstItem="JtV-AG-0J9" firstAttribute="top" secondItem="Yfa-2V-NCa" secondAttribute="top" constant="10" id="J3T-qG-JlA"/>
+                            <constraint firstItem="JtV-AG-0J9" firstAttribute="top" secondItem="Yfa-2V-NCa" secondAttribute="top" constant="20" id="J3T-qG-JlA"/>
                             <constraint firstItem="JtV-AG-0J9" firstAttribute="leading" secondItem="Yfa-2V-NCa" secondAttribute="leading" constant="20" id="LKM-4t-Gps"/>
-                            <constraint firstItem="rt3-Bb-l6N" firstAttribute="top" secondItem="uTk-0f-XIn" secondAttribute="bottom" constant="-58.5" id="Qjg-m6-ott"/>
+                            <constraint firstItem="rt3-Bb-l6N" firstAttribute="bottom" secondItem="uTk-0f-XIn" secondAttribute="bottom" constant="30" id="Qjg-m6-ott"/>
                             <constraint firstItem="rt3-Bb-l6N" firstAttribute="top" secondItem="JtV-AG-0J9" secondAttribute="bottom" constant="20" id="fhF-Ik-mrO"/>
-                            <constraint firstItem="Yfa-2V-NCa" firstAttribute="trailing" secondItem="uTk-0f-XIn" secondAttribute="trailing" constant="20" id="gR5-zs-xDS"/>
+                            <constraint firstItem="Yfa-2V-NCa" firstAttribute="trailing" secondItem="uTk-0f-XIn" secondAttribute="trailing" constant="12" id="gR5-zs-xDS"/>
                             <constraint firstItem="Yfa-2V-NCa" firstAttribute="trailing" secondItem="JtV-AG-0J9" secondAttribute="trailing" constant="20" id="heO-xD-TUI"/>
                             <constraint firstItem="Yfa-2V-NCa" firstAttribute="bottom" secondItem="rt3-Bb-l6N" secondAttribute="bottom" id="qlF-ch-qvD"/>
                             <constraint firstItem="Yfa-2V-NCa" firstAttribute="trailing" secondItem="rt3-Bb-l6N" secondAttribute="trailing" id="v8z-hz-MbV"/>
@@ -328,6 +328,9 @@
         <image name="stop.fill" catalog="system" width="128" height="113"/>
         <namedColor name="Backgroud">
             <color red="0.94900000095367432" green="0.94900000095367432" blue="0.96899998188018799" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Backgroud2">
+            <color red="0.20392156862745098" green="0.74509803921568629" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Icons">
             <color red="0.18431372549019609" green="0.8666666666666667" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

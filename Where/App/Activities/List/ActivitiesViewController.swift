@@ -22,8 +22,15 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         self.tableView.reloadData()
     }
     
-    func presentDetail(For activity: Activity) {
-        	
+    private func presentDetail(For activity: Activity) {
+        self.performSegue(withIdentifier: "ShowDetailSegue", sender: activity)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let viewController = segue.destination as? ActivityDetailViewController,
+        let activity = sender as? Activity else { return }
+        
+        viewController.activity = activity
     }
     
     //MARK: - UITableViewDelegate
