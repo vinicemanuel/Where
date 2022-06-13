@@ -21,6 +21,8 @@ class ActivityDetailViewModel: ActivityViewModel, MapViewOlderRouteDelegate {
     func getOldRouteOverlay() -> [CustonPolyline] {
         let activities = self.databaseManager.getAllActivities()
         let workouts = activities.map( { $0.convertToWorkout() } )
-        return []
+        let overlays = workouts.map( { $0.convertToPolylineOveraly() } )
+        
+        return overlays
     }
 }

@@ -15,7 +15,7 @@ class ActivityDetailViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     
-    private var viewModelDelegate: ActivityDetailViewModel!
+    private var modelView: ActivityDetailViewModel!
     var activity: Activity!
     
     override func viewDidLoad() {
@@ -24,24 +24,34 @@ class ActivityDetailViewController: UIViewController, MKMapViewDelegate {
         self.deleteActivity.layer.cornerRadius = self.deleteActivity.frame.height / 2
 
         self.mapActivities.delegate = self
-        self.viewModelDelegate = ActivityDetailViewModel(activity: activity)
+        self.modelView = ActivityDetailViewModel(activity: activity)
         self.configView()
         self.configMap()
     }
     
     private func configView() {
-        self.dateLabel.text = self.viewModelDelegate.dateString
-        self.distanceLabel.text = self.viewModelDelegate.distanceString
+        self.dateLabel.text = self.modelView.dateString
+        self.distanceLabel.text = self.modelView.distanceString
     }
     
     private func configMap() {
-        let center = self.viewModelDelegate.center
-        let straightDistance = self.viewModelDelegate.straightDistance
+        self.configOldRoutes()
+        self.configCurrentRoute()
+    }
+    
+    private func configOldRoutes() {
+        let overlays = self.modelView.getOldRouteOverlay()
+        self.mapActivities.addOverlays(overlays)
+    }
+    
+    private func configCurrentRoute() {
+        let center = self.modelView.center
+        let straightDistance = self.modelView.straightDistance
         
         let region = MKCoordinateRegion(center: center, latitudinalMeters: straightDistance * 1.2, longitudinalMeters: straightDistance * 1.2)
         self.mapActivities.setRegion(region, animated: false)
         
-        let overlay = self.viewModelDelegate.overlay
+        let overlay = self.modelView.overlay
         overlay.color = Colors.currentRouteColor
         self.mapActivities.addOverlay(overlay)
     }
