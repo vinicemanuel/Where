@@ -29,4 +29,10 @@ class Workout {
         self.discante = 0
         self.lastLocation = nil
     }
+    
+    func convertToPolylineOveraly() -> CustonPolyline {
+        let overlay = CustonPolyline(coordinates: self.route, count: self.route.count)
+        overlay.color = Colors.oldRoutesColor
+        return overlay
+    }
 }

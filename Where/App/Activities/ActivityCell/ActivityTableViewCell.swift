@@ -14,7 +14,7 @@ class ActivityTableViewCell: UITableViewCell, MKMapViewDelegate {
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var distanceLabel: UILabel!
     
-    private var viewModelDelegate: ActivityDetailViewModelDelegate!
+    private var viewModelDelegate: ActivityViewModelDelegate!
     
     private var activity: Activity!
     
@@ -26,7 +26,7 @@ class ActivityTableViewCell: UITableViewCell, MKMapViewDelegate {
     }
     
     func configWith(activity: Activity) {
-        self.viewModelDelegate = ActivityDetailViewModel(activity: activity)
+        self.viewModelDelegate = ActivityViewModel(activity: activity)
         
         let center = self.viewModelDelegate.center
         let straightDistance = self.viewModelDelegate.straightDistance

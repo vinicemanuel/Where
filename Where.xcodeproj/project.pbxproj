@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09DDD34D28576A560097D764 /* ActivityDetailViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DDD34C28576A560097D764 /* ActivityDetailViewModelDelegate.swift */; };
+		09DDD34D28576A560097D764 /* ActivityViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DDD34C28576A560097D764 /* ActivityViewModelDelegate.swift */; };
+		09DDD3532857B8430097D764 /* ActivityDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DDD3522857B8430097D764 /* ActivityDetailViewModel.swift */; };
+		09DDD3552857B8BC0097D764 /* MapViewOlderRouteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DDD3542857B8BC0097D764 /* MapViewOlderRouteDelegate.swift */; };
+		09DDD3572857BB920097D764 /* Activity+Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DDD3562857BB920097D764 /* Activity+Workout.swift */; };
 		09FDF88F2853C64900C32326 /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FDF88E2853C64900C32326 /* ActivityDetailViewController.swift */; };
 		342EFD0A274DA82A00376997 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD09274DA82A00376997 /* DatabaseManager.swift */; };
 		342EFD0C274DB02300376997 /* CustonPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EFD0B274DB02300376997 /* CustonPolyline.swift */; };
@@ -17,7 +20,7 @@
 		34300595273B39C9004C0D27 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34300594273B39C9004C0D27 /* ActivityTableViewCell.swift */; };
 		3450F26B27D2CCD6004E7266 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F26A27D2CCD6004E7266 /* RecordViewModel.swift */; };
 		3450F26D27D2DD42004E7266 /* ActivitiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F26C27D2DD42004E7266 /* ActivitiesViewModel.swift */; };
-		3450F26F27D2E1BF004E7266 /* ActivityDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F26E27D2E1BF004E7266 /* ActivityDetailViewModel.swift */; };
+		3450F26F27D2E1BF004E7266 /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F26E27D2E1BF004E7266 /* ActivityViewModel.swift */; };
 		3450F27127D3D879004E7266 /* ActivitiesMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F27027D3D879004E7266 /* ActivitiesMapViewModel.swift */; };
 		3450F27327D3E952004E7266 /* RecordViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F27227D3E952004E7266 /* RecordViewModelTests.swift */; };
 		3450F27627D3E9B6004E7266 /* Fake_WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450F27527D3E9B6004E7266 /* Fake_WorkoutManager.swift */; };
@@ -48,7 +51,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		09DDD34C28576A560097D764 /* ActivityDetailViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewModelDelegate.swift; sourceTree = "<group>"; };
+		09DDD34C28576A560097D764 /* ActivityViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModelDelegate.swift; sourceTree = "<group>"; };
+		09DDD3522857B8430097D764 /* ActivityDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewModel.swift; sourceTree = "<group>"; };
+		09DDD3542857B8BC0097D764 /* MapViewOlderRouteDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewOlderRouteDelegate.swift; sourceTree = "<group>"; };
+		09DDD3562857BB920097D764 /* Activity+Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+Workout.swift"; sourceTree = "<group>"; };
 		09FDF88E2853C64900C32326 /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
 		342EFD09274DA82A00376997 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		342EFD0B274DB02300376997 /* CustonPolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustonPolyline.swift; sourceTree = "<group>"; };
@@ -58,7 +64,7 @@
 		34300594273B39C9004C0D27 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		3450F26A27D2CCD6004E7266 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
 		3450F26C27D2DD42004E7266 /* ActivitiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewModel.swift; sourceTree = "<group>"; };
-		3450F26E27D2E1BF004E7266 /* ActivityDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewModel.swift; sourceTree = "<group>"; };
+		3450F26E27D2E1BF004E7266 /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
 		3450F27027D3D879004E7266 /* ActivitiesMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesMapViewModel.swift; sourceTree = "<group>"; };
 		3450F27227D3E952004E7266 /* RecordViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModelTests.swift; sourceTree = "<group>"; };
 		3450F27527D3E9B6004E7266 /* Fake_WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fake_WorkoutManager.swift; sourceTree = "<group>"; };
@@ -106,6 +112,7 @@
 				342EFD132762CE5200376997 /* ActivitiesMap */,
 				348AF501273B2A59003D0B00 /* Activities */,
 				348AF4F92739E818003D0B00 /* Record */,
+				09DDD3542857B8BC0097D764 /* MapViewOlderRouteDelegate.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -122,6 +129,7 @@
 		09FDF88D2853C62F00C32326 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				09DDD3522857B8430097D764 /* ActivityDetailViewModel.swift */,
 				09FDF88E2853C64900C32326 /* ActivityDetailViewController.swift */,
 			);
 			path = Detail;
@@ -242,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				348AF4FF2739EE61003D0B00 /* Colors.swift */,
+				09DDD3562857BB920097D764 /* Activity+Workout.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -249,8 +258,8 @@
 		348AF501273B2A59003D0B00 /* Activities */ = {
 			isa = PBXGroup;
 			children = (
-				09DDD34C28576A560097D764 /* ActivityDetailViewModelDelegate.swift */,
-				3450F26E27D2E1BF004E7266 /* ActivityDetailViewModel.swift */,
+				09DDD34C28576A560097D764 /* ActivityViewModelDelegate.swift */,
+				3450F26E27D2E1BF004E7266 /* ActivityViewModel.swift */,
 				09FDF88D2853C62F00C32326 /* Detail */,
 				34300593273B37EE004C0D27 /* ActivityCell */,
 				09FDF88C2853C62500C32326 /* List */,
@@ -359,12 +368,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09DDD3532857B8430097D764 /* ActivityDetailViewModel.swift in Sources */,
 				348AF4FB2739E839003D0B00 /* RecordViewController.swift in Sources */,
 				09FDF88F2853C64900C32326 /* ActivityDetailViewController.swift in Sources */,
 				342EFD0A274DA82A00376997 /* DatabaseManager.swift in Sources */,
 				342EFD152762CE8C00376997 /* ActivitiesMapViewController.swift in Sources */,
 				348AF5002739EE61003D0B00 /* Colors.swift in Sources */,
-				09DDD34D28576A560097D764 /* ActivityDetailViewModelDelegate.swift in Sources */,
+				09DDD34D28576A560097D764 /* ActivityViewModelDelegate.swift in Sources */,
+				09DDD3572857BB920097D764 /* Activity+Workout.swift in Sources */,
 				342EFD1227612C4700376997 /* WorkoutManager.swift in Sources */,
 				342EFD0C274DB02300376997 /* CustonPolyline.swift in Sources */,
 				3450F27127D3D879004E7266 /* ActivitiesMapViewModel.swift in Sources */,
@@ -372,11 +383,12 @@
 				348350552747177200CDD898 /* Where.xcdatamodeld in Sources */,
 				3450F26B27D2CCD6004E7266 /* RecordViewModel.swift in Sources */,
 				3450F26D27D2DD42004E7266 /* ActivitiesViewModel.swift in Sources */,
-				3450F26F27D2E1BF004E7266 /* ActivityDetailViewModel.swift in Sources */,
+				3450F26F27D2E1BF004E7266 /* ActivityViewModel.swift in Sources */,
 				3483505727471A7E00CDD898 /* Workout .swift in Sources */,
 				348AF503273B2A8C003D0B00 /* ActivitiesViewController.swift in Sources */,
 				348AF4C82739DB7E003D0B00 /* AppDelegate.swift in Sources */,
 				348AF4CA2739DB7E003D0B00 /* SceneDelegate.swift in Sources */,
+				09DDD3552857B8BC0097D764 /* MapViewOlderRouteDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

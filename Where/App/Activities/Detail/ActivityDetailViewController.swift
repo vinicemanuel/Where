@@ -15,7 +15,7 @@ class ActivityDetailViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     
-    private var viewModelDelegate: ActivityDetailViewModelDelegate!
+    private var viewModelDelegate: ActivityDetailViewModel!
     var activity: Activity!
     
     override func viewDidLoad() {

@@ -8,9 +8,8 @@
 import Foundation
 import CoreLocation
 
-protocol ActivitiesMapViewModelDelegate {
+protocol ActivitiesMapViewModelDelegate: MapViewOlderRouteDelegate {
     func askForLastLocation(lastLocationClosure: @escaping (CLLocation) -> Void)
-    func getOldRouteOverlay() -> [CustonPolyline]
 }
 
 class ActivitiesMapViewModel: NSObject, ActivitiesMapViewModelDelegate, CLLocationManagerDelegate {
@@ -29,36 +28,17 @@ class ActivitiesMapViewModel: NSObject, ActivitiesMapViewModelDelegate, CLLocati
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
-    private func convertActivityToWorkout(activity: Activity) -> Workout {
-        let workout = Workout()
-        
-        guard let locations: NSOrderedSet = activity.locations,
-        let locationsArray = locations.array as? [Location] else {
-            return workout
-        }
-        
-        let workoutRoute = locationsArray.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) })
-        workout.route = workoutRoute
-        
-        return workout
-    }
-    
-    private func workoutToPolylineOveraly(workout: Workout) -> CustonPolyline {
-        let overlay = CustonPolyline(coordinates: workout.route, count: workout.route.count)
-        overlay.color = Colors.oldRoutesColor
-        return overlay
-    }
-    
     //MARK: - ActivitiesMapViewDelegate
     func askForLastLocation(lastLocationClosure: @escaping (CLLocation) -> Void) {
         self.lastLocationClosure = lastLocationClosure
         self.locationManager.requestLocation()
     }
     
+    //MARK: - MapViewOlderRouteDelegate
     func getOldRouteOverlay() -> [CustonPolyline] {
         let activities = self.databaseManager.getAllActivities()
-        let workouts = activities.map(self.convertActivityToWorkout(activity:))
-        let overlays = workouts.map(self.workoutToPolylineOveraly(workout:))
+        let workouts = activities.map( { $0.convertToWorkout() } )
+        let overlays = workouts.map( { $0.convertToPolylineOveraly() } )
         return overlays
     }
 

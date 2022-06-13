@@ -1,5 +1,5 @@
 //
-//  ActivityCellViewModel.swift
+//  ActivityViewModel.swift
 //  Where
 //
 //  Created by Vinicius Silva on 04/03/22.
@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-class ActivityDetailViewModel: ActivityDetailViewModelDelegate {
+class ActivityViewModel: ActivityViewModelDelegate {
     private var activityDate: String = ""
     private var distance: String = ""
     private var distanceMinMax: CLLocationDistance = 0
