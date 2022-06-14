@@ -10,7 +10,7 @@ import CoreLocation
 import Combine
 @testable import Where
 
-class Fake_WorkoutManager: WorkoutProtocol {
+class Fake_WorkoutManager: WorkoutDelegate {
     
     private let passthroughLocations = PassthroughSubject<[CLLocation], Never>()
     var timer: Timer?

@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 @testable import Where
 
-class Fake_DatabaseManager: DatabaseProtocol {
+class Fake_DatabaseManager: DatabaseDelegate {
     var workouts: [Workout] = []
     
     //MARK: - DatabaseProtocol

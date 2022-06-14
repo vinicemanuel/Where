@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gfQ-oC-yYe">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gfQ-oC-yYe">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -48,7 +48,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="250" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="PnP-mW-Rih">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="250" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="PnP-mW-Rih">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="Ct4-OY-WIa">
@@ -60,11 +60,11 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="activityCell" rowHeight="250" id="8Z7-xD-of3" customClass="ActivityTableViewCell" customModule="Where" customModuleProvider="target">
                                         <rect key="frame" x="20" y="49.5" width="374" height="250"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Z7-xD-of3" id="DsI-in-VNV">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Z7-xD-of3" id="DsI-in-VNV">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="250"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <mapView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsCompass="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DgZ-uA-38x">
+                                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsCompass="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DgZ-uA-38x">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="200"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="200" id="TdN-Uo-wNH"/>
@@ -118,6 +118,7 @@
                     <tabBarItem key="tabBarItem" title="Activites" image="location.fill" catalog="system" landscapeImage="location.fill" id="nQP-79-rLw"/>
                     <connections>
                         <outlet property="tableView" destination="PnP-mW-Rih" id="AuP-xt-14O"/>
+                        <segue destination="1hM-nM-eZV" kind="presentation" identifier="ShowDetailSegue" id="Mvp-ux-Gy4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V1m-X2-7cJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -251,6 +252,70 @@
             </objects>
             <point key="canvasLocation" x="-403" y="-562"/>
         </scene>
+        <!--Activity Detail View Controller-->
+        <scene sceneID="qSA-jM-ByL">
+            <objects>
+                <viewController id="1hM-nM-eZV" customClass="ActivityDetailViewController" customModule="Where" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="t12-nl-s1S">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rt3-Bb-l6N">
+                                <rect key="frame" x="0.0" y="104.5" width="414" height="737.5"/>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="28/01/1994" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfU-XZ-lU7">
+                                <rect key="frame" x="12" y="64" width="91.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uTk-0f-XIn">
+                                <rect key="frame" x="333" y="781" width="69" height="31"/>
+                                <color key="backgroundColor" name="Backgroud2"/>
+                                <color key="tintColor" name="Backgroud"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Delete">
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="14"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="deleteActivityTaped:" destination="1hM-nM-eZV" eventType="touchUpInside" id="WcN-TA-ms0"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="15 km" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rb-Tq-z3j">
+                                <rect key="frame" x="354.5" y="64" width="47.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Yfa-2V-NCa"/>
+                        <color key="backgroundColor" name="Backgroud"/>
+                        <constraints>
+                            <constraint firstItem="rt3-Bb-l6N" firstAttribute="top" secondItem="bfU-XZ-lU7" secondAttribute="bottom" constant="20" id="06H-p8-Zws"/>
+                            <constraint firstItem="7rb-Tq-z3j" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bfU-XZ-lU7" secondAttribute="trailing" constant="20" id="7Ee-SH-mjC"/>
+                            <constraint firstItem="rt3-Bb-l6N" firstAttribute="leading" secondItem="Yfa-2V-NCa" secondAttribute="leading" id="9q6-RT-Tzd"/>
+                            <constraint firstItem="bfU-XZ-lU7" firstAttribute="top" secondItem="Yfa-2V-NCa" secondAttribute="top" constant="20" id="Ft5-bj-6QD"/>
+                            <constraint firstItem="rt3-Bb-l6N" firstAttribute="bottom" secondItem="uTk-0f-XIn" secondAttribute="bottom" constant="30" id="Qjg-m6-ott"/>
+                            <constraint firstItem="Yfa-2V-NCa" firstAttribute="trailing" secondItem="7rb-Tq-z3j" secondAttribute="trailing" constant="12" id="cm7-gB-2P1"/>
+                            <constraint firstItem="Yfa-2V-NCa" firstAttribute="trailing" secondItem="uTk-0f-XIn" secondAttribute="trailing" constant="12" id="gR5-zs-xDS"/>
+                            <constraint firstItem="bfU-XZ-lU7" firstAttribute="leading" secondItem="Yfa-2V-NCa" secondAttribute="leading" constant="12" id="gs0-ky-AQ4"/>
+                            <constraint firstItem="7rb-Tq-z3j" firstAttribute="top" secondItem="Yfa-2V-NCa" secondAttribute="top" constant="20" id="kIG-rK-Vin"/>
+                            <constraint firstItem="rt3-Bb-l6N" firstAttribute="top" secondItem="7rb-Tq-z3j" secondAttribute="bottom" constant="20" id="mEL-ry-EBk"/>
+                            <constraint firstItem="Yfa-2V-NCa" firstAttribute="bottom" secondItem="rt3-Bb-l6N" secondAttribute="bottom" id="qlF-ch-qvD"/>
+                            <constraint firstItem="Yfa-2V-NCa" firstAttribute="trailing" secondItem="rt3-Bb-l6N" secondAttribute="trailing" id="v8z-hz-MbV"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dateLabel" destination="bfU-XZ-lU7" id="WSH-aA-mHZ"/>
+                        <outlet property="deleteActivity" destination="uTk-0f-XIn" id="Frl-ct-6KL"/>
+                        <outlet property="distanceLabel" destination="7rb-Tq-z3j" id="jPi-LG-pUO"/>
+                        <outlet property="mapActivities" destination="rt3-Bb-l6N" id="nWB-J7-MlM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cTr-Pz-XXi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-404" y="919"/>
+        </scene>
     </scenes>
     <resources>
         <image name="location.fill" catalog="system" width="128" height="121"/>
@@ -261,6 +326,9 @@
         <image name="stop.fill" catalog="system" width="128" height="113"/>
         <namedColor name="Backgroud">
             <color red="0.94900000095367432" green="0.94900000095367432" blue="0.96899998188018799" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Backgroud2">
+            <color red="0.20392156862745098" green="0.74509803921568629" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Icons">
             <color red="0.18431372549019609" green="0.8666666666666667" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

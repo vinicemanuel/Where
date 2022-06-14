@@ -9,6 +9,6 @@ import Foundation
 import UIKit
 
 struct Colors {
-    static let currentRouteColor = UIColor.blue.withAlphaComponent(0.9)
+    static let currentRouteColor = UIColor.magenta.withAlphaComponent(0.9)
     static let oldRoutesColor = UIColor.yellow.withAlphaComponent(0.9)
 }

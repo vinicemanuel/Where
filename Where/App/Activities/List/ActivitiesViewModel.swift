@@ -7,19 +7,19 @@
 
 import Foundation
 
-protocol ActivitiesViewModelProtocol {
+protocol ActivitiesViewModelDelegate {
     var activities: [Activity] { get }
     func deleteActicity(activity: Activity) -> Bool
 }
 
-class ActivitiesViewModel: ActivitiesViewModelProtocol {
-    private let databaseManager: DatabaseProtocol
+class ActivitiesViewModel: ActivitiesViewModelDelegate {
+    private let databaseManager: DatabaseDelegate
     
-    init(databaseManager: DatabaseProtocol = DatabaseManager.shared) {
+    init(databaseManager: DatabaseDelegate = DatabaseManager.shared) {
         self.databaseManager = databaseManager
     }
     
-    //MARK: - ActivitiesViewModelProtocol
+    //MARK: - ActivitiesViewModelDelegate
     func deleteActicity(activity: Activity) -> Bool {
         let deleted = self.databaseManager.delete(activity: activity)
         return deleted

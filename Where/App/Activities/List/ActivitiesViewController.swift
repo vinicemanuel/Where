@@ -7,9 +7,12 @@
 
 import UIKit
 
-class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ActivityDetailDelegate {
+    
     @IBOutlet weak var tableView: UITableView!
-    var viewModelDelegate: ActivitiesViewModelProtocol!
+    var viewModelDelegate: ActivitiesViewModelDelegate!
+    
+    private let segueID = "ShowDetailSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,15 +25,31 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         self.tableView.reloadData()
     }
     
+    private func presentDetail(For activity: Activity) {
+        self.performSegue(withIdentifier: self.segueID, sender: activity)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let viewController = segue.destination as? ActivityDetailViewController,
+        let activity = sender as? Activity else { return }
+        
+        viewController.activity = activity
+        viewController.delegate = self
+    }
+    
     //MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ActivityTableViewCell.cellID) as! ActivityTableViewCell
         
         let activity = self.viewModelDelegate.activities[indexPath.section]
-        
         cell.configWith(activity: activity)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let activity = self.viewModelDelegate.activities[indexPath.section]
+        self.presentDetail(For: activity)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -41,6 +60,11 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 20
+    }
+    
+    //MARK: - ActivityDetailDelegate
+    func deletedActivity() {
+        self.tableView.reloadData()
     }
     
     //MARK: - UITableViewDataSource

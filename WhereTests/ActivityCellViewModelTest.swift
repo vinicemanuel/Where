@@ -47,9 +47,9 @@ class ActivityCellViewModelTest: XCTestCase {
     
     func test_components() {
         let activity = DatabaseManager.shared.getAllActivities().last!
-        let viewModel = ActivityCellViewModel(activity: activity)
+        let viewModel = ActivityDetailViewModel(activity: activity)
         
-        XCTAssertEqual(viewModel.dateString, "11/07/1980 08:34")
+        XCTAssertEqual(viewModel.dateString, "11/07/1980")
         XCTAssertEqual(viewModel.distanceString, "719.25 Km")
         XCTAssertEqual(viewModel.straightDistance, 313783.52481117623)
         XCTAssertEqual(viewModel.center.latitude, 1)

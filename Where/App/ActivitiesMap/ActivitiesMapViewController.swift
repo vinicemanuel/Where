@@ -11,7 +11,7 @@ import MapKit
 class ActivitiesMapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
-    var modelView: ActivitiesMapViewModelProtocol!
+    var modelView: ActivitiesMapViewModelDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -21,7 +21,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate {
     private var shouldShowAllOtherRoutes = false
     private var routeOverlay: CustonPolyline? = nil
     
-    var viewModelDelegate: RecordViewModelProtocol!
+    var viewModelDelegate: RecordViewModelDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()

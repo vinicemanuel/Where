@@ -1,5 +1,5 @@
 //
-//  ActivityCellViewModel.swift
+//  ActivityViewModel.swift
 //  Where
 //
 //  Created by Vinicius Silva on 04/03/22.
@@ -8,15 +8,7 @@
 import Foundation
 import CoreLocation
 
-protocol ActivityCellViewModelProtocol {
-    var dateString: String { get }
-    var distanceString: String { get }
-    var straightDistance: CLLocationDistance { get }
-    var center: CLLocationCoordinate2D { get }
-    var overlay: CustonPolyline { get }
-}
-
-class ActivityCellViewModel: ActivityCellViewModelProtocol {
+class ActivityViewModel: ActivityViewModelDelegate {
     private var activityDate: String = ""
     private var distance: String = ""
     private var distanceMinMax: CLLocationDistance = 0
@@ -38,7 +30,7 @@ class ActivityCellViewModel: ActivityCellViewModelProtocol {
     
     private func stringFromDate(date: Date) -> String {
         let dateFormater = DateFormatter()
-        dateFormater.dateFormat = "dd/MM/yyyy HH:mm"
+        dateFormater.dateFormat = "dd/MM/yyyy"
         let string = dateFormater.string(from: date)
         return string
     }

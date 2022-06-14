@@ -14,14 +14,19 @@ class ActivityTableViewCell: UITableViewCell, MKMapViewDelegate {
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var distanceLabel: UILabel!
     
-    private var viewModelDelegate: ActivityCellViewModelProtocol!
+    private var viewModelDelegate: ActivityViewModelDelegate!
     
     private var activity: Activity!
     
     static let cellID = "activityCell"
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.mapView.delegate = self
+    }
+    
     func configWith(activity: Activity) {
-        self.viewModelDelegate = ActivityCellViewModel(activity: activity)
+        self.viewModelDelegate = ActivityViewModel(activity: activity)
         
         let center = self.viewModelDelegate.center
         let straightDistance = self.viewModelDelegate.straightDistance
@@ -31,16 +36,11 @@ class ActivityTableViewCell: UITableViewCell, MKMapViewDelegate {
         
         self.mapView.removeOverlays(self.mapView.overlays)
         let overlay = self.viewModelDelegate.overlay
-        overlay.color = Colors.oldRoutesColor
+        overlay.color = Colors.currentRouteColor
         self.mapView.addOverlay(overlay)
         
         self.dateLabel.text = self.viewModelDelegate.dateString
         self.distanceLabel.text = self.viewModelDelegate.distanceString
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.mapView.delegate = self
     }
     
     //MARK: - MKMapViewDelegate

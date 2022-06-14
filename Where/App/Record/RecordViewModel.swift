@@ -10,12 +10,11 @@ import CoreLocation
 import Combine
 
 
-protocol RecordViewModelProtocol {
+protocol RecordViewModelDelegate: MapViewOlderRouteDelegate {
     func askForLastLocation(lastLocationClosure: @escaping (CLLocation) -> Void)
     func configSubscriptionForLocationsUpdate(locationsClosure: @escaping ([CLLocation]) -> Void)
     
     func getCurrentRouteOverlay() -> CustonPolyline
-    func getOldRouteOverlay() -> [CustonPolyline]
     
     func saveCurrentWorkout()
     func discartCurrentWorkout()
@@ -29,21 +28,21 @@ protocol RecordViewModelProtocol {
     var lastRegisteredLocation: CLLocation? { get }
 }
 
-class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDelegate {
+class RecordViewModel: NSObject, RecordViewModelDelegate, CLLocationManagerDelegate {
     private var subscriptions = Set<AnyCancellable>()
     private var lastLocation: CLLocation?
     private var workout = Workout()
     private var oldWorkouts: [Workout] = []
     private var lastLocationClosure: ((CLLocation) -> Void)?
-    private let workoutManager: WorkoutProtocol
-    private let databaseManager: DatabaseProtocol
-    private let authorizationManager: AuthorizationProtocol
+    private let workoutManager: WorkoutDelegate
+    private let databaseManager: DatabaseDelegate
+    private let authorizationManager: AuthorizationDelegate
     
     let locationManager = CLLocationManager()
     
-    init(workoutManager: WorkoutProtocol = WorkoutManager.shared,
-         databaseManager: DatabaseProtocol = DatabaseManager.shared,
-         authorizationManager: AuthorizationProtocol = WorkoutManager.shared)
+    init(workoutManager: WorkoutDelegate = WorkoutManager.shared,
+         databaseManager: DatabaseDelegate = DatabaseManager.shared,
+         authorizationManager: AuthorizationDelegate = WorkoutManager.shared)
     {
         self.workoutManager = workoutManager
         self.databaseManager = databaseManager
@@ -55,26 +54,6 @@ class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDeleg
     private func configLocationManager() {
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    }
-    
-    private func convertActivityToWorkout(activity: Activity) -> Workout {
-        let workout = Workout()
-        
-        guard let locations: NSOrderedSet = activity.locations,
-        let locationsArray = locations.array as? [Location] else {
-            return workout
-        }
-        
-        let workoutRoute = locationsArray.map({ CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) })
-        workout.route = workoutRoute
-        
-        return workout
-    }
-    
-    private func workoutToPolylineOveraly(workout: Workout) -> CustonPolyline {
-        let overlay = CustonPolyline(coordinates: workout.route, count: workout.route.count)
-        overlay.color = Colors.oldRoutesColor
-        return overlay
     }
     
     func configSubscriptionForLocationsUpdate(locationsClosure: @escaping ([CLLocation]) -> Void) {
@@ -108,16 +87,6 @@ class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDeleg
         CustonPolyline(coordinates: self.workout.route, count: self.workout.route.count)
     }
     
-    func getOldRouteOverlay() -> [CustonPolyline] {
-        let activities = self.databaseManager.getAllActivities()
-        let workouts = activities.map(self.convertActivityToWorkout(activity:))
-        self.oldWorkouts = workouts
-        
-        let overlays = self.oldWorkouts.map(self.workoutToPolylineOveraly(workout:))
-        
-        return overlays
-    }
-    
     func askForLastLocation(lastLocationClosure: @escaping (CLLocation) -> Void) {
         self.lastLocationClosure = lastLocationClosure
         self.locationManager.requestLocation()
@@ -137,6 +106,17 @@ class RecordViewModel: NSObject, RecordViewModelProtocol, CLLocationManagerDeleg
     
     func isDeviceLocationIsAuthorized() -> Bool {
         self.authorizationManager.deviceLocationIsAuthorized()
+    }
+    
+    //MARK: - MapViewOlderRouteDelegate
+    func getOldRouteOverlay() -> [CustonPolyline] {
+        let activities = self.databaseManager.getAllActivities()
+        let workouts = activities.map( { $0.convertToWorkout() } )
+        self.oldWorkouts = workouts
+        
+        let overlays = self.oldWorkouts.map( { $0.convertToPolylineOveraly() } )
+        
+        return overlays
     }
     
     //MARK: CLLocationManagerDelegate
